@@ -7,7 +7,6 @@ class ErrorResponse extends Error {
         super(message)
         this.status = status
     }
-
 }
 
 class ConflitRequestError extends ErrorResponse {

@@ -18,19 +18,11 @@ app.use(express.urlencoded({
     extended: true
 }))
 
-
+// init database
 require('./db/init.mongo')
-
-app.post('/create-product', async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const product = await Product.create(req.body)
-
-        res.status(201).json(product);
-
-    } catch (error) {
-        res.status(400).json({ message: error });
-    }
-})
+// init router
+import mainRouter from "./router/main/index"
+app.use('/', mainRouter)
 
 // handling error
 app.use((req: Request, res: Response, next: NextFunction) => {

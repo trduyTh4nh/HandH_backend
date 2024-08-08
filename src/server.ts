@@ -1,5 +1,3 @@
-import express, { Request, Response } from 'express';
-
 import app from '../src/app'
 import env from 'dotenv'
 env.config()
