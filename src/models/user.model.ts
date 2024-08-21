@@ -14,12 +14,14 @@ interface IUserAddress {
 }
 
 interface IUser extends Document {
+    _id: mongoose.Types.ObjectId,
     email: string,
     password: string,
     name: string;
     birthDay?: string;
     phone: string;
     userAddress?: IUserAddress
+    role: any
 }
 
 const userAddressSchema: Schema = new Schema({
@@ -37,7 +39,11 @@ const userSchema: Schema = new Schema<IUser>({
     name: { type: String, required: true },
     birthDay: { type: String },
     phone: { type: String },
-    userAddress: userAddressSchema
+    userAddress: userAddressSchema,
+    role: {
+        type: Array,
+        default: []
+    }
 }, {
     collection: COLLECTION_NAME,
     timestamps: true

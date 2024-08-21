@@ -1,0 +1,8 @@
+
+NOTE: 315
+Xác thực giúp đảm bảo rằng token không bị thay đổi. Khi một token được ký (signed), 
+nó tạo ra một chữ ký (signature) mã hóa dựa trên dữ liệu payload và khóa bí mật (secret) 
+hoặc khóa riêng (private key). Khi xác thực token, chữ ký được so sánh với dữ liệu payload 
+và khóa công khai (public key) để đảm bảo nó khớp và token không bị sửa đổi.
+
+

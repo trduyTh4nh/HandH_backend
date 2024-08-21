@@ -1,4 +1,6 @@
 
+import _ from 'lodash'
+
 const errorWriteDown = (error: any): string => {
     let errorMessage = 'An error occurred';
     if (error instanceof Error) {
@@ -8,6 +10,11 @@ const errorWriteDown = (error: any): string => {
     return errorMessage
 }
 
+const getInfoData = ({ fields = [], object = {} }) => {
+    return _.pick(object, fields)
+}
+
 export {
-    errorWriteDown
+    errorWriteDown,
+    getInfoData
 }

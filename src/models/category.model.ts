@@ -10,6 +10,8 @@ const DOCUMENT_NAME: string = 'category'
 interface ICategory extends Document {
     category_name: string,
     category_description: string,
+    category_image: string,
+    category_total: number
 }
 
 const categorySchema: Schema = new Schema<ICategory>({
@@ -21,6 +23,14 @@ const categorySchema: Schema = new Schema<ICategory>({
         type: String,
         required: true
     },
+    category_image: {
+        type: String,
+        required: true
+    },
+    category_total: {
+        type: Number
+    }
+    
 }, {
     collection: COLLECTION_NAME,
     timestamps: true

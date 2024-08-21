@@ -80,8 +80,8 @@ productSchema.pre('deleteOne', { document: true, query: false }, async function 
         throw new BadRequestError(err, 400)
     }
 })
-const Product = mongoose.model<IProduct>(DOCUMENT_NAME, productSchema)
+const ProductModel = mongoose.model<IProduct>(DOCUMENT_NAME, productSchema)
 
-export default Product
+export default ProductModel
 
 

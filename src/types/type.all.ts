@@ -9,6 +9,7 @@ export interface IUserAddress {
     apartmentNumber?: string;
 }
 
+
 export interface ICart extends Document {
     cart_user: mongoose.Types.ObjectId;
     cart_products: any;
@@ -21,7 +22,8 @@ export interface ICartDetail extends Document {
     quantity: number;
 }
 
-export interface IUser {
+export interface IUser extends Document {
+    _id?: mongoose.Types.ObjectId; 
     email: string;
     password: string;
     name: string;
@@ -42,4 +44,26 @@ export interface IProduct extends Document {
     isPublished: boolean;
     isModified: (product_name: string) => boolean;
     product_category: mongoose.Types.ObjectId;
+}
+
+
+export interface IKeyTokenModel {
+    user: mongoose.Types.ObjectId,
+    privateKey: string,
+    publicKey: string,
+    refreshTokenUsed?: any,
+    refreshToken?: string
+}
+
+interface IUserData {
+    email: string;
+    password: string;
+    name: string;
+    birthDay?: string;
+    phone: string;
+    userAddress?: IUserAddress;
+}
+
+export {
+    IUserData
 }
