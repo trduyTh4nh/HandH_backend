@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { ICart } from "../types/type.all";
 
 const COLLECTION_NAME: string = 'cart'
 const DOCUMENT_NAME: string = 'cart'
@@ -27,12 +28,12 @@ const cartDetailSchema: Schema = new Schema<ICartDetail>({
 })
 
 // cart 
-interface ICart {
-    cart_user: mongoose.Types.ObjectId,
-    cart_products: any,
-    cart_count: number,
-    cart_status: string,
-}
+// interface ICart {
+//     cart_user: mongoose.Types.ObjectId,
+//     cart_products: ICartDetail[],
+//     cart_count: number,
+//     cart_status: string,
+// }
 
 const cartSchema: Schema = new Schema<ICart>({
     cart_user: {

@@ -1,6 +1,7 @@
-import mongoose, { Document } from "mongoose";
+import mongoose, { Document, Types } from "mongoose";
 
 export interface IUserAddress {
+    _id?: Types.ObjectId
     street?: string;
     city?: string;
     state?: string;
@@ -11,8 +12,9 @@ export interface IUserAddress {
 
 
 export interface ICart extends Document {
+    _id?: Types.ObjectId
     cart_user: mongoose.Types.ObjectId;
-    cart_products: any;
+    cart_products: ICartDetail[];
     cart_count: number;
     cart_status: string;
 }
@@ -30,9 +32,11 @@ export interface IUser extends Document {
     birthDay?: string;
     phone: string;
     userAddress?: IUserAddress;
+    role?: string
 }
 
 export interface IProduct extends Document {
+    _id?: Types.ObjectId
     product_name: string;
     product_thumb: string;
     product_description: string;
@@ -44,10 +48,14 @@ export interface IProduct extends Document {
     isPublished: boolean;
     isModified: (product_name: string) => boolean;
     product_category: mongoose.Types.ObjectId;
+    product_sizes: ISizeProductVarication[];
+    product_colors: IColorProductVariation[];
+    product_stock: number
 }
 
 
-export interface IKeyTokenModel {
+export interface IKeyTokenModel  {
+    _id?: Types.ObjectId
     user: mongoose.Types.ObjectId,
     privateKey: string,
     publicKey: string,
@@ -56,6 +64,7 @@ export interface IKeyTokenModel {
 }
 
 interface IUserData {
+    _id?: Types.ObjectId
     email: string;
     password: string;
     name: string;
@@ -64,6 +73,45 @@ interface IUserData {
     userAddress?: IUserAddress;
 }
 
+export interface IColorProductVariation {
+    color_code: string,
+    color_price: number,
+    color_isPicked: boolean
+}
+
+export interface ISizeProductVarication {
+    size_name: string,
+    size_price: number
+    size_isPicked: boolean
+}
+
+
+export interface ICategory extends Document {
+    _id?: Types.ObjectId
+    category_name: string,
+    category_description: string,
+    category_image: string,
+    category_total: number
+}
+// đang tạo biết thế
 export {
     IUserData
 }
+
+
+
+
+// interface IProduct extends Document {
+//     _id?: Types.ObjectId
+//     product_name: string,
+//     product_thumb: string,
+//     product_description: string,
+//     product_price: number,
+//     product_slug?: string,
+//     product_rating?: number,
+//     product_variations?: any,
+//     isDraft: boolean,
+//     isPublished: boolean,
+//     isModified: (product_name: string) => boolean,
+//     product_category: mongoose.Types.ObjectId;
+// }

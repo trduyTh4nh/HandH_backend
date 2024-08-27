@@ -31,6 +31,39 @@ class KeyTokenService {
             throw new BadRequestError(_error, 400)
         }
     }
+
+    static async removeKeyById(key: any) {
+        const _id = new mongoose.Types.ObjectId(key)
+        return await TokenModel.deleteOne({
+            _id: _id
+        }).lean()
+    }
+
+    static async findByRefreshTokenUsed(refreshToken: string) {
+        return await TokenModel.findOne({
+            refreshTokenUsed: refreshToken
+        })
+    }
+
+    static async deleteKeyById(key: any) {
+        const _id = new mongoose.Types.ObjectId(key)
+
+        return await TokenModel.deleteOne({
+            user: _id
+        })
+    }
+
+    static async findTokenByRefreshToken(refreshToken: string) {
+        return await TokenModel.findOne({
+            refreshToken: refreshToken
+        })
+    }
+
+    static async findKeyStoreById(_id: any): Promise<any> {
+        return await TokenModel.findOne({
+            _id: _id
+        })
+    }
 }
 
 export default KeyTokenService

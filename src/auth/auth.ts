@@ -10,7 +10,7 @@ const HEADER = {
     APIKEY: 'x-api-key',
     AUTHORIZATION: 'authorization',
     CLIENT_ID: 'x-client-id',
-    REFRESHTOKEN: 'x-rtoken-id'
+    REFRESHTOKEN: 'x-rtoken-id',
 }
 
 const createTokenPair = async (payload: any, privateKey: string, publicKey: string): Promise<any> => {
@@ -42,7 +42,6 @@ const createTokenPair = async (payload: any, privateKey: string, publicKey: stri
 
 
 const authentication = asyncHandler(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-
     if (!req.headerData) {
         req.headerData = {};
     }
@@ -68,7 +67,7 @@ const authentication = asyncHandler(async (req: Request, res: Response, next: Ne
             }
 
             const decodeUser: any = JWT.verify(refreshtoken, keyStore.privateKey)
-
+            console.log("DEBUG DECODE ID USER: ", decodeUser.user)
             if (userId !== decodeUser.user) {
                 throw new AuthFailureError('Invalid Iduser')
             }
@@ -88,18 +87,20 @@ const authentication = asyncHandler(async (req: Request, res: Response, next: Ne
     const accessToken = req.headers[HEADER.AUTHORIZATION] as string | undefined;
     if (!accessToken) throw new AuthFailureError('Invalid request')
 
-  
-
     try {
         const decodeUser: any = JWT.verify(accessToken, keyStore.publicKey);
         if (userId !== decodeUser.user) {
             throw new AuthFailureError("Invalid userID");
         }
-
         req.headerData.keyStore = keyStore;
+     
         req.headerData.user = decodeUser;
+     
+        // req.headerData.keyStore = keyStore;
+        // const _idUser: string = decodeUser.user
+        // const foundUser: any = await findUserById(_idUser)
+        // req.headerData.user = foundUser;
 
-        console.log(req.headerData)
         return next();
     } catch (error) {
         throw error;

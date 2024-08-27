@@ -7,6 +7,7 @@ import { authentication } from "../../auth/auth"
 
 const router = Router()
 router.use(authentication)
+router.post('/createProduct', asyncHandler(productController.createAProduct))
 router.get('/', asyncHandler(productController.getAllProduct))
 
 export default router
