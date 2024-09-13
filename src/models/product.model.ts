@@ -38,9 +38,9 @@ const productSchema: Schema = new Schema<IProduct>({
         max: [5, 'Rating must below 5'],
         set: (val: number) => Math.round(val * 10) / 10
     },
-  
-    isDraft: { type: Boolean, default: true, index: true, select: false },
-    isPublished: { type: Boolean, default: false, index: true, select: false },
+
+    isDraft: { type: Boolean, default: true, index: true },
+    isPublished: { type: Boolean, default: false, index: true },
     product_category: {
         type: Schema.Types.ObjectId,
         ref: 'category',
@@ -54,6 +54,9 @@ const productSchema: Schema = new Schema<IProduct>({
     },
     product_stock: {
         type: Number
+    },
+    product_images: {
+        type: []
     }
 }, {
     collection: COLLECTION_NAME,

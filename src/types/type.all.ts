@@ -17,11 +17,16 @@ export interface ICart extends Document {
     cart_products: ICartDetail[];
     cart_count: number;
     cart_status: string;
+    cart_total_price: number
 }
 
 export interface ICartDetail extends Document {
-    product_id: mongoose.Types.ObjectId;
+    _id?: Types.ObjectId
     quantity: number;
+    product: IProduct,
+    priceCartDetail: number,
+    size: string,
+    color: string
 }
 
 export interface IUser extends Document {
@@ -43,10 +48,10 @@ export interface IProduct extends Document {
     product_price: number;
     product_slug: string;
     product_rating: number;
-    product_variations: any;
+    product_images: string[];
     isDraft: boolean;
-    isPublished: boolean;
-    isModified: (product_name: string) => boolean;
+    isPublished?: boolean;
+    // isModified: (product_name: string) => boolean;
     product_category: mongoose.Types.ObjectId;
     product_sizes: ISizeProductVarication[];
     product_colors: IColorProductVariation[];

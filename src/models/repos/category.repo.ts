@@ -29,9 +29,7 @@ const deleteCategoryFunc = async (_id: string): Promise<any> => {
 
 const updateCategoryFunc = async (category: ICategory, id: string): Promise<any> => {
     const { category_description, category_image, category_name, category_total } = category
-
     const updateData: Partial<ICategory> = {}
-
     if (category_description) updateData.category_description = category_description;
     if (category_image) updateData.category_image = category_image
     if (category_name) updateData.category_name = category_name
@@ -44,8 +42,6 @@ const updateCategoryFunc = async (category: ICategory, id: string): Promise<any>
     else {
         throw new BadRequestError("No data to update");
     }
-
-
 }
 
 export {

@@ -1,5 +1,5 @@
 import { AuthFailureError, BadRequestError, ForbiddenError, NotFoundError } from "../core/error.response";
-import { findUserByEmail, findUserByEmail_ } from "../models/repos/user.repo";
+import { findUserByEmail, findUserByEmail_, findUserById, updateInfoUser } from "../models/repos/user.repo";
 import User from "../models/user.model";
 import { IKeyTokenModel, IUser, IUserData } from "../types/type.all";
 import bcrypt from "bcrypt"
@@ -104,7 +104,7 @@ class AccessService {
         const match: boolean = await bcrypt.compare(password, foudnUser.password)
 
         if (!match) {
-            throw new AuthFailureError("Authentication error")
+            throw new AuthFailureError("Authentication error, Incorrect your password!")
         }
 
         const privateKey: string = crypto.randomBytes(64).toString("hex")
@@ -276,6 +276,22 @@ class AccessService {
         } catch (error) {
             const er: string = errorWriteDown(error)
             throw new BadRequestError(er)
+        }
+    }
+
+
+    static async updateInfomationUser(user: IUser, userId: string): Promise<any> {
+        if (userId) {
+            const foundUser = await findUserById(userId)
+
+            if (!foundUser) {
+                throw new BadRequestError("Nout found user to update!")
+            }
+
+            return await updateInfoUser(user, userId)
+        }
+        else {
+            throw new BadRequestError("Not found user to update!")
         }
     }
 

@@ -6,3 +6,51 @@ hoặc khóa riêng (private key). Khi xác thực token, chữ ký được so 
 và khóa công khai (public key) để đảm bảo nó khớp và token không bị sửa đổi.
 
 
+
+NODE: TASK FOR PRODUCT 
+1. Public product +
+2. Private product + 
+3. Delete product (cho nó thành draft) +
+4. Undo product (isDraft: false) + 
+
+5. Cập nhật size cho product (thêm size, xóa size) + 
+6. Cập nhật màu cho product (thêm màu, xóa màu) + 
+    . Cập nhật category cho product 
+
+7. Cập nhật product (name, thumb, images. .....) + 
+8. Lấy danh sách sản phẩm (có phân trang)  + 
+
+
+9. Xóa vĩnh viễn sản phẩm (ràng buộc sản phẩm đó đã được unpublich và đang là draft)
+
+
+// còn cart má cái này khó
+// update thông tin cá nhân 
+// thêm sản phẩm vào giỏ hàng
+    -- thêm toàn bộ sản phẩm vào chứ k phải thêm id
+    -- xóa sản phẩm ra khỏi giỏ hàng mà sản phẩm có id đó và sản phẩm nằm trong giỏ hàng có id thuộc sở hữu idUser đó
+    -- update số lượng sản phẩm tăng hoặc giảm 
+    -- kiểm tra là sản phẩm đó chỉ có 1 màu và 1 size tương ứng với sản phẩm đã thêm 
+    -- kiểm tra nếu số lượng giảm có 0 thì xóa sản phẩm đó ra ngoài giỏ hàng
+    -- tính tổng tiền sản phẩm dựa trên số lượng
+    -- tổng tiền sản phẩm dựa trên toàn bộ sản phẩm trong giỏ hàng
+
+10. add sản phẩm vào giỏ hàng thì add toàn bộ record vào để có thể control được việc chọn sản phẩm của riêng khách hàng đó
+
+
+11. nhớ test expire của access token
+
+12. kiểm soát access token lưu ở databse và khi người dùng đăng nhập nên lưu token vào đâu để bảo mất
+ - session storage
+ - cookie 
+ - có thể mã hóa key hay gì đó không?
+
+ 13. cái thằng cart ở frontend có thể dùng redux để control state
+ // có vẻ như nếu xóa 1 sản phẩm ra khỏi gió hàng cần phải call api thì nó sẽ bị chậm
+ // hoặc là tăng giảm sản phẩm nếu call liên tục có thể dùng redux giải quyêt
+ 
+
+PRISMA .-. 
+
+
+14. Search

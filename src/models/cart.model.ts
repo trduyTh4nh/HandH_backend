@@ -1,39 +1,36 @@
 import mongoose, { Schema } from "mongoose";
-import { ICart } from "../types/type.all";
+import { ICart, ICartDetail } from "../types/type.all";
+import ProductModel from "./product.model";
 
 const COLLECTION_NAME: string = 'cart'
 const DOCUMENT_NAME: string = 'cart'
 
 
-
-// cart detail
-
-interface ICartDetail extends Document {
-    product_id: mongoose.Types.ObjectId,
-    quantity: number
-}
-
 const cartDetailSchema: Schema = new Schema<ICartDetail>({
-    product_id: {
-        type: Schema.Types.ObjectId,
-        ref: 'product'
-    },
     quantity: {
         type: Number,
         required: true,
-        default: 0
+        default: 1
+    },
+    product: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'product',
+        required: true
+    },
+    priceCartDetail: {
+        type: Number,
+        required: true
+    },
+    size: {
+        type: String,
+        require: true
+    },
+    color: {
+        type: String,
+        required: true
     }
-}, {
-    _id: false
 })
 
-// cart 
-// interface ICart {
-//     cart_user: mongoose.Types.ObjectId,
-//     cart_products: ICartDetail[],
-//     cart_count: number,
-//     cart_status: string,
-// }
 
 const cartSchema: Schema = new Schema<ICart>({
     cart_user: {
@@ -54,6 +51,10 @@ const cartSchema: Schema = new Schema<ICart>({
         required: true,
         enum: ['active', 'completed', 'failed', 'pending'],
         default: 'active'
+    },
+    cart_total_price: {
+        type: Number,
+        default: 0
     }
 }, {
     collection: COLLECTION_NAME,
@@ -61,6 +62,17 @@ const cartSchema: Schema = new Schema<ICart>({
 })
 
 const Cart = mongoose.model<ICart>(DOCUMENT_NAME, cartSchema)
+
+// const CartDetail = mongoose.model<ICartDetail>('cart_detail', cartDetailSchema)
+
+// cartSchema.pre('deleteOne', { document: true, query: false }, async function () {
+//     try {
+//         const cartId = this._id
+//         await CartDetail.deleteMany({  })
+//     } catch (error) {
+        
+//     }
+// })
 
 
 export default Cart

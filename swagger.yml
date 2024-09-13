@@ -1,0 +1,484 @@
+openapi: 3.0.3
+info:
+  title: Ecommerce Test API
+  description: |-
+    # Xây dựng API 
+  contact:
+    email: ttranduy999@gmail.com
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://localhost:8888/v1/api/
+tags:
+  - name: Access
+    description: API cho truy cập của User (demo)
+  - name: Category
+    description: API cho sản phẩm (demo)
+  - name: Product
+    description: API cho product (demo)
+paths:
+  /access/login:
+    post:
+      tags:
+        - Access
+      summary: Đăng nhập
+      description: Đăng nhập tài khoản
+      operationId: login
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "example@gmail.com"
+                password:
+                  type: string
+                  example: "12345"
+        required: true
+      responses:
+        "200":
+          description: "Đăng nhập thành công"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Login successfully!"
+                  metadata:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                            example: "66b77cff848eb939db15cc66"
+                          email:
+                            type: string
+                            example: "test@gmail.com"
+                          name:
+                            type: string
+                            example: "test"
+                          userAddress:
+                            type: object
+                            properties:
+                              street:
+                                type: string
+                                example: "Phường 3"
+                              city:
+                                type: string
+                                example: "HCM"
+                              state:
+                                type: string
+                                example: "Quận 3"
+                              country:
+                                type: string
+                                example: "Việt Nam"
+                              zipcode:
+                                type: string
+                                example: "12345"
+                              apartmentNumber:
+                                type: string
+                                example: "Apt 101"
+                              _id:
+                                type: string
+                                example: "66b77cff848eb939db15cc67"
+                      tokens:
+                        type: object
+                        properties:
+                          accessToken:
+                            type: string
+                            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                          refreshToken:
+                            type: string
+                            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        "401":
+          description: "Invalid credentials"
+  /access/register:
+    post:
+      tags:
+        - Access
+      summary: Đăng kí
+      description: Đăng kí tài khoản người dùng mới
+      operationId: register
+      requestBody:
+        description: Yêu cầu đăng ký tài khoản với email, mật khẩu, và các thông tin cá nhân khác
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "steve@gmail.com"
+                password:
+                  type: string
+                  example: "steve"
+                name:
+                  type: string
+                  example: "steve"
+                birthDay:
+                  type: string
+                  format: date
+                  example: "1990-01-01"
+                phone:
+                  type: string
+                  example: "+1234567890"
+                userAddress:
+                  type: object
+                  properties:
+                    street:
+                      type: string
+                      example: "Phường 3"
+                    city:
+                      type: string
+                      example: "HCM"
+                    state:
+                      type: string
+                      example: "Quận 3"
+                    country:
+                      type: string
+                      example: "Việt Nam"
+                    zipcode:
+                      type: string
+                      example: "12345"
+                    apartmentNumber:
+                      type: string
+                      example: "Apt 101"
+      responses:
+        "201":
+          description: "Đăng kí thành công"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Registration successful!"
+                  metadata:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                            example: "66b77cff848eb939db15cc66"
+                          email:
+                            type: string
+                            example: "steve@gmail.com"
+                          name:
+                            type: string
+                            example: "steve"
+                          birthDay:
+                            type: string
+                            format: date
+                            example: "1990-01-01"
+                          phone:
+                            type: string
+                            example: "+1234567890"
+                          userAddress:
+                            type: object
+                            properties:
+                              street:
+                                type: string
+                                example: "Phường 3"
+                              city:
+                                type: string
+                                example: "HCM"
+                              state:
+                                type: string
+                                example: "Quận 3"
+                              country:
+                                type: string
+                                example: "Việt Nam"
+                              zipcode:
+                                type: string
+                                example: "12345"
+                              apartmentNumber:
+                                type: string
+                                example: "Apt 101"
+        "400":
+          description: "Yêu cầu không hợp lệ"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Bad Request: Invalid input"
+        "500":
+          description: "Lỗi server"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal server error"
+  /category:
+    post:
+      summary: Tạo loại sản phẩm
+      description: Tạo một loại sản phẩm mới, chỉ người dùng có role là admin mới sử dụng được
+      tags:
+        - Category
+      security:
+        - customAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: object
+                  properties:
+                    category_name:
+                      type: string
+                      example: "Quần Short"
+                    category_description:
+                      type: string
+                      example: "All kinds of electronic items"
+                    category_image:
+                      type: string
+                      example: "https://example.com/images/electronics.png"
+                    category_total:
+                      type: number
+                      example: 100
+              example:
+                category:
+                  category_name: "Quần Short"
+                  category_description: "All kinds of electronic items"
+                  category_image: "https://example.com/images/electronics.png"
+                  category_total: 100
+      parameters:
+        - in: header
+          name: x-client-id
+          required: true
+          schema:
+            type: string
+          example: "66b77cff848eb939db15cc66"
+      responses:
+        200:
+          description: Tạo loại sản phẩm thành công
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  metadata:
+                    type: object
+                    properties:
+                      category_name:
+                        type: string
+                        example: "Quần Short"
+                      category_description:
+                        type: string
+                        example: "All kinds of electronic items"
+                      category_image:
+                        type: string
+                        format: uri
+                        example: "https://example.com/images/electronics.png"
+                      category_total:
+                        type: number
+                        example: 100
+        400:
+          description: Lỗi yêu cầu không hợp lệ
+        401:
+          description: Unauthorized
+  /product:
+    get:
+      tags:
+        - Product
+      summary: Lấy danh sách sản phẩm
+      description: Lấy tất cả các sản phẩm từ hệ thống.
+      security:
+        - customAuth: []
+      parameters:
+        - in: header
+          name: x-client-id
+          required: true
+          schema:
+            type: string
+          example: "66b77cff848eb939db15cc66"
+      responses:
+        200:
+          description: Danh sách sản phẩm thành công
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        401:
+          description: Unauthorized
+components:
+  securitySchemes:
+    customAuth:
+      type: apiKey
+      in: header
+      name: authorization
+  schemas:
+    UserAddress:
+        type: object
+        properties:
+          street:
+            type: string
+            example: "123 Main St"
+          city:
+            type: string
+            example: "New York"
+          state:
+            type: string
+            example: "NY"
+          country:
+            type: string
+            example: "USA"
+          zipcode:
+            type: string
+            example: "10001"
+          apartmentNumber:
+            type: string
+            example: "Apt 4B"
+    User:
+        type: object
+        required:
+          - email
+          - password
+          - name
+        properties:
+          _id:
+            type: string
+            description: "User's ObjectId from mongoose"
+            example: "64ff2c25d8fefa0012345678"
+          email:
+            type: string
+            format: email
+            example: "user@example.com"
+          password:
+            type: string
+            format: password
+            example: "hashedPassword123"
+          name:
+            type: string
+            example: "John Doe"
+          birthDay:
+            type: string
+            format: date
+            example: "1990-01-01"
+          phone:
+            type: string
+            example: "+1234567890"
+          userAddress:
+            type: object
+          role:
+            type: array
+            items:
+              type: string
+            example: ["admin", "user"]
+        example:
+          _id: "64ff2c25d8fefa0012345678"
+          email: "john.doe@example.com"
+          password: "hashedPassword123"
+          name: "John Doe"
+          birthDay: "1990-01-01"
+          phone: "+1234567890"
+          userAddress:
+            street: "123 Main St"
+            city: "New York"
+            state: "NY"
+            country: "USA"
+            zipcode: "10001"
+            apartmentNumber: "Apt 4B"
+          role: ["user"]
+    Category:
+        type: object
+        required:
+          - category_name
+          - category_description
+          - category_image
+        properties:
+          category_name:
+            type: string
+            example: "Electronics"
+          category_description:
+            type: string
+            example: "All kinds of electronic products"
+          category_image:
+            type: string
+            format: uri
+            example: "https://example.com/images/electronics.jpg"
+          category_total:
+            type: number
+            example: 100
+        example:
+          category_name: "Electronics"
+          category_description: "All kinds of electronic products"
+          category_image: "https://example.com/images/electronics.jpg"
+          category_total: 100
+    Product:
+      type: object
+      properties:
+        product_name:
+          type: string
+          example: "Sản phẩm A"
+        product_thumb:
+          type: string
+          example: "https://example.com/images/product_thumb.png"
+        product_description:
+          type: string
+          example: "Mô tả sản phẩm A"
+        product_price:
+          type: number
+          format: float
+          example: 100.00
+        product_slug:
+          type: string
+          example: "san-pham-a"
+        product_rating:
+          type: number
+          format: float
+          example: 4.5
+          minimum: 1
+          maximum: 5
+        isDraft:
+          type: boolean
+          example: true
+        isPublished:
+          type: boolean
+          example: false
+        product_category:
+          type: string
+          example: "categoryId12345"
+        product_sizes:
+          type: array
+          items:
+            type: string
+          example: ["S", "M", "L"]
+        product_colors:
+          type: array
+          items:
+            type: string
+          example: ["Red", "Blue", "Green"]
+        product_stock:
+          type: number
+          example: 50
+        product_images:
+          type: array
+          items:
+            type: string
+          example: ["https://example.com/images/product1.png", "https://example.com/images/product2.png"]

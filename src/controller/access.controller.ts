@@ -62,6 +62,14 @@ class AccessController {
         }).send(res)
     }
 
+    updateUserInformation = async (req: Request, res: Response, next: NextFunction) => {
+        const userInfo = req.body.user
+        const idUser = req.params.id
+        new SuccessResponse({
+            message: "Update user information successfully!",
+            metadata: await AccessService.updateInfomationUser(userInfo, idUser)
+        }).send(res)
+    }
     
 }
 

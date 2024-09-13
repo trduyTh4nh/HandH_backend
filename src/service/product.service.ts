@@ -1,6 +1,7 @@
+import { identity, size } from "lodash";
 import { BadRequestError } from "../core/error.response";
-import { crearteProductFunc, getAllProducts } from "../models/repos/product.repo";
-import { ICategory, IProduct } from "../types/type.all";
+import { addColorProductFunc, addSizeProductFunc, crearteProductFunc, deleteProductFunc, draftProductFunc, getAllProducts, getPageProducts, getProductById, publicProductFunc, removeColorProductFunc, removeSizeProductFunc, unDraftProductFunc, unPublicProductFunc, updateProductFunc } from "../models/repos/product.repo";
+import { ICategory, IColorProductVariation, IProduct, ISizeProductVarication } from "../types/type.all";
 
 class ProductService {
     // nhớ phân trang khi lấy all product về
@@ -30,7 +31,93 @@ class ProductService {
 
     }
 
- 
+    static async publicProduct(idProduct: string): Promise<any> {
+        if (!idProduct) {
+            throw new BadRequestError('Missing id product!')
+        }
+
+        const foundProduct = await getProductById(idProduct)
+        if (!foundProduct) {
+            throw new BadRequestError('Not found product!')
+        }
+
+
+        return await publicProductFunc(idProduct)
+    }
+
+    static async unPublicProduct(idProduct: string): Promise<any> {
+        if (!idProduct) {
+            throw new BadRequestError('Missing some data')
+        }
+
+        const foundProduct = await getProductById(idProduct)
+        if (!foundProduct) {
+            throw new BadRequestError('Not found product to draft!')
+        }
+
+        return await unPublicProductFunc(idProduct)
+    }
+
+    static async daftProduct(idProduct: string): Promise<any> {
+        if (!idProduct) {
+            throw new BadRequestError('Missing sone data!')
+        }
+        const foundProduct = await getProductById(idProduct)
+        if (!foundProduct) {
+            throw new BadRequestError('Not found product to draft!')
+        }
+
+        return await draftProductFunc(idProduct)
+    }
+
+    static async unDaftProduct(idProduct: string): Promise<any> {
+        if (!idProduct) {
+            throw new BadRequestError('Missing sone data!')
+        }
+        const foundProduct = await getProductById(idProduct)
+        if (!foundProduct) {
+            throw new BadRequestError('Not found product to draft!')
+        }
+
+        return await unDraftProductFunc(idProduct)
+    }
+
+    static async getProductsWithPage(numPage: number): Promise<any> {
+
+        if (!numPage) {
+            throw new BadRequestError("Can not find page!")
+        }
+        const pageFound: number = numPage >= 1 ? numPage : 1
+        return await getPageProducts(pageFound)
+    }
+
+    static async updateProduct(newProduct: IProduct, idPro: string): Promise<any> {
+        return await updateProductFunc(newProduct, idPro)
+    }
+
+    static async addSizeProduct(data: { size: ISizeProductVarication, id: string }): Promise<any> {
+        return await addSizeProductFunc(data.size, data.id)
+    }
+
+    static async removeSizeProduct(payload: { size: string, idPro: string }): Promise<any> {
+        return await removeSizeProductFunc(payload.size, payload.idPro)
+    }
+
+
+    static async addColorProduct(data: { color: IColorProductVariation, id: string }): Promise<any> {
+        return await addColorProductFunc(data.color, data.id)
+    }
+
+    static async removeColorProduct(payload: { color: string, idPro: string }): Promise<any> {
+        return await removeColorProductFunc(payload.color, payload.idPro)
+    }
+
+    static async deleteProductForever(id: string): Promise<any> {
+        return await deleteProductFunc(id)
+    }
+
+
+
 }
 
 export default ProductService

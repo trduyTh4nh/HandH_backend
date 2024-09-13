@@ -7,13 +7,14 @@ import compression from 'compression'
 import { prototype } from 'events'
 import { BadRequestError, ErrorResponse } from './core/error.response'
 import Product from './models/product.model'
-
+import cors from "cors"
 
 // config
 app.use(morgan("dev"))
 app.use(helmet())
 app.use(compression())
 app.use(express.json())
+app.use(cors())
 app.use(express.urlencoded({
     extended: true
 }))
