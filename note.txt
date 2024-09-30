@@ -27,7 +27,7 @@ NODE: TASK FOR PRODUCT
 // còn cart má cái này khó
 // update thông tin cá nhân 
 // thêm sản phẩm vào giỏ hàng
-    -- thêm toàn bộ sản phẩm vào chứ k phải thêm id
+    -- thêm toàn bộ sản p   hẩm vào chứ k phải thêm id
     -- xóa sản phẩm ra khỏi giỏ hàng mà sản phẩm có id đó và sản phẩm nằm trong giỏ hàng có id thuộc sở hữu idUser đó
     -- update số lượng sản phẩm tăng hoặc giảm 
     -- kiểm tra là sản phẩm đó chỉ có 1 màu và 1 size tương ứng với sản phẩm đã thêm 
@@ -50,7 +50,55 @@ NODE: TASK FOR PRODUCT
  // hoặc là tăng giảm sản phẩm nếu call liên tục có thể dùng redux giải quyêt
  
 
-PRISMA .-. 
+
+14. API Search -- 
+
+15. upload image from local -- 
+
+16. document banner CRUD -- 
+
+17. fliter sản phẩm --
+
+18. api wish list - ĐANG LÀM CÁI NÀY
+(khi lấy toàn bộ sản phẩm ra chỉ cần so sánh nó với các phẩm trong wishlist nếu có tồn tại trong wishlist thì chuyển icon favorite thành màu hồng )
+
+19. cookie và session 
+
+(tiền đề api này là phải có thanh toán)
+20. api lịch sử mua hàng
+  - tạo lịch sử mua hàng khi thanh toán
+  
 
 
-14. Search
+
+
+
+
+
+
+
+
+
+----- config firebase
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAGGK6OqFMa3DMmRHfR9kbJLVuLJ_SRM-I",
+  authDomain: "handh-storage.firebaseapp.com",
+  projectId: "handh-storage",
+  storageBucket: "handh-storage.appspot.com",
+  messagingSenderId: "446759787230",
+  appId: "1:446759787230:web:2b4a580ab4a8527512c04f",
+  measurementId: "G-935J0S4121"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);

@@ -1,5 +1,6 @@
 # Node modules
 node_modules/
+storage_config.json
 
 # Logs
 logs/
@@ -41,3 +42,7 @@ coverage/
 # Ignore database files (if applicable)
 *.db
 *.sqlite
+
+handh-storage-firebase-adminsdk-6cigj-ad3d98089d.json
+
+note
