@@ -86,6 +86,10 @@ require("./db/init.mongo");
 import mainRouter from "./router/main/index";
 app.use("/", mainRouter);
 
+app.post("/hello", (req: Request, res: Response, next: NextFunction) => {
+  res.send({ message: "Hello" });
+});
+
 // handling error
 app.use((req: Request, res: Response, next: NextFunction) => {
   const error = new BadRequestError("Not found");
