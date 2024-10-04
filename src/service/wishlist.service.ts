@@ -1,5 +1,4 @@
 import { BadRequestError } from "../core/error.response";
-import { removeColorProductFunc } from "../models/repos/product.repo";
 import {
   addProducIntoWishListFunc,
   getAllProductInWistList,
@@ -10,6 +9,7 @@ class WishListService {
   static async addProductToWishList(
     idProduct: string,
     idUser: string
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> {
     if (!idProduct) {
       throw new BadRequestError("Missing product!");
