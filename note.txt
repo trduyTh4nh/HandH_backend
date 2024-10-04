@@ -71,6 +71,7 @@ NODE: TASK FOR PRODUCT
 
 
 
+-- settup hosting with CICD pipeline 
 
 
 
