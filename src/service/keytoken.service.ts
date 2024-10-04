@@ -17,7 +17,7 @@ class KeyTokenService {
 
             return tokens
         } catch (error) {
-            var _error: string = errorWriteDown(error)
+            const _error: string = errorWriteDown(error)
             throw new BadRequestError(_error, 400)
         }
     }
@@ -27,7 +27,7 @@ class KeyTokenService {
             const userObjectId = new mongoose.Types.ObjectId(userId)
             return await TokenModel.findOne({ user: userObjectId })
         } catch (error) {
-            var _error: string = errorWriteDown(error)
+            const _error: string = errorWriteDown(error)
             throw new BadRequestError(_error, 400)
         }
     }

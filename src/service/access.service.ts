@@ -96,7 +96,7 @@ class AccessService {
         throw new BadRequestError("Can not create user!", 400);
       }
     } catch (error) {
-      var _error: string = errorWriteDown(error);
+      const _error: string = errorWriteDown(error);
       throw new BadRequestError(_error);
     }
   }
@@ -219,7 +219,7 @@ class AccessService {
         tokens,
       };
     } catch (error) {
-      var er: string = errorWriteDown(error);
+      const er: string = errorWriteDown(error);
       throw new Error(er);
     }
   }
@@ -273,7 +273,7 @@ class AccessService {
         tokens,
       };
     } catch (error) {
-      var er: string = errorWriteDown(error);
+      const er: string = errorWriteDown(error);
       throw new Error(er);
     }
   }

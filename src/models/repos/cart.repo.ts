@@ -27,7 +27,7 @@ const addProductIntoCartFunc = async (cartDetail: ICartDetail, idCart: string): 
         throw new BadRequestError("Can not find cart to add!")
     }
 
-    var checkProductExists = foundCart.cart_products.find(pro =>
+    const checkProductExists = foundCart.cart_products.find(pro =>
         pro.product.toString() === product._id?.toString() &&
         pro.size === size &&
         pro.color === color
@@ -67,7 +67,7 @@ const addProductIntoCartFunc = async (cartDetail: ICartDetail, idCart: string): 
 // tại sao phải có màu và size, 
 // do màu và size khác thì nó là một sản phẩm khác trong giỏ hàng và giá nó cũng khác nhau r
 const removeProductInCartFunc = async (idCartDetail: string, idCart: string): Promise<any> => {
-    var foundCart = await findCartById(idCart)
+    const foundCart = await findCartById(idCart)
     console.log("idCartDetail: ", idCartDetail)
     if (!foundCart) {
         throw new BadRequestError("Can not find cart to remove product!")

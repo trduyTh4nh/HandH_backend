@@ -37,7 +37,7 @@ categorySchema.pre('deleteOne', { document: true, query: false }, async function
         await Product.deleteMany({ product_category: categoryId })
         next()
     } catch (error: any) {
-        var err: any = error.message
+        const err: any = error.message
         throw new BadRequestError(err, 400)
     }
 })

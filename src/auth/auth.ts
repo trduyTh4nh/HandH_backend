@@ -46,7 +46,7 @@ const createTokenPair = async (
 
     return { accessToken, refreshToken };
   } catch (error) {
-    var _err: string = errorWriteDown(error);
+    const _err: string = errorWriteDown(error);
     throw new Error(_err);
   }
 };

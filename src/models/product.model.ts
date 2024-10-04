@@ -93,7 +93,7 @@ productSchema.pre(
       const productId = this._id;
       await Comment.deleteMany({ comment_product: productId });
     } catch (error: any) {
-      var err: any = error.message;
+      const err: any = error.message;
       throw new BadRequestError(err, 400);
     }
   }
