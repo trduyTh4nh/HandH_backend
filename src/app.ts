@@ -85,7 +85,7 @@ require("./db/init.mongo");
 // init router
 import mainRouter from "./router/main/index";
 app.use("/", mainRouter);
-app.post("/hello", (req: Request, res: Response, next: NextFunction) => {
+app.get("/hello", (req: Request, res: Response, next: NextFunction) => {
   res.send({ message: "Hello" });
 });
 app.get("/", (req: Request, res: Response) => {
