@@ -70,7 +70,6 @@ NODE: TASK FOR PRODUCT
   
 
 
-
 -- settup hosting with CICD pipeline 
 
 
@@ -103,3 +102,28 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------- HOT FIX TÌM THẤY BUG SAU KHI DEPLOY ------------------------
+
+-- HOT BUG: [API Reresh token] khi call api refresh token token cũ vẫn dùng được 
+
+-- HOT BUG: [API Public product] khi public product nhớ kiểm tra xem nó có đang là draft hay không nếu trạng thái đang là draft thì không cho public
+ và ngược lại nếu trạng thái là draft thì được public. Còn 1 cái nữa là dữ liệu trên database thì được cập nhật ở field isPublished là true nhưng data trả về k đc cập nhật
+
+-- HOT BUG: [API Draft product] khi draft kiểm tra xem nó có đang được public không nếu đang được public thì không được draft phải unpublich mới được draft
+  và ngược lại nếu trang thái là unpublich thì được draft. Còn 1 cái nữa là dữ liệu trên database thì được cập nhật ở field isDraft là true nhưng data trả về k đc cập nhật
+
+-- 

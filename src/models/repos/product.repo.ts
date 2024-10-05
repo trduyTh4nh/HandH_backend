@@ -28,6 +28,10 @@ const getProductById = async (idPro: string) => {
 const publicProductFunc = async (idProduct: string) => {
   const _id = _idConverted(idProduct);
 
+  const product: IProduct | undefined = await findProductById(idProduct);
+
+  // product.isDraft
+
   return await ProductModel.findOneAndUpdate(
     { _id },
     {
@@ -94,16 +98,11 @@ const updateProductFunc = async (
   product: IProduct,
   id: string
 ): Promise<any> => {
-  if (product._id) {
-    const foundProduct = await findProductById(product._id?.toString());
-
-    if (!foundProduct) {
-      throw new BadRequestError("Not found product to update!");
-    }
-  } else {
+  const foundProduct = await findProductById(id);
+  console.log("DEUBG PRODUCT: ", foundProduct);
+  if (!foundProduct) {
     throw new BadRequestError("Not found product to update!");
   }
-
   const {
     product_name,
     product_thumb,

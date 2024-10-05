@@ -127,6 +127,9 @@ class ProductService {
     newProduct: IProduct,
     idPro: string
   ): Promise<any> {
+    if (!idPro) {
+      throw new BadRequestError("Not found product id!");
+    }
     return await updateProductFunc(newProduct, idPro);
   }
 
