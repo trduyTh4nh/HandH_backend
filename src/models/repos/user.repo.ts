@@ -65,7 +65,12 @@ const updateAvatarForUser = async (
     throw new BadRequestError("Not found image to update!");
   }
 
-  const fileName = foundUserToUpdate.avatar?.split("/").pop();
+  console.log(foundUserToUpdate);
+
+  const fileName =
+    foundUserToUpdate.avatar?.split("/").pop() === undefined
+      ? foundUserToUpdate.name?.split("/").pop()
+      : foundUserToUpdate.avatar?.split("/").pop();
   console.log("DEBUG file name: ", fileName);
   const file = bucket.file(fileName);
 
