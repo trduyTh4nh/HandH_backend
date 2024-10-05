@@ -88,6 +88,9 @@ app.use("/", mainRouter);
 app.post("/hello", (req: Request, res: Response, next: NextFunction) => {
   res.send({ message: "Hello" });
 });
+app.get("/", (req: Request, res: Response) => {
+  res.send({ message: "HELLO HANDH" });
+});
 
 // handling error
 app.use((req: Request, res: Response, next: NextFunction) => {

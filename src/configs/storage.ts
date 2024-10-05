@@ -11,8 +11,6 @@ const TESTURRI: any = process.env.URI;
 
 const { private_key } = JSON.parse(process.env.PRIVATEKEY || "");
 
-console.log("DEBUG private_key: ", private_key);
-
 const serviceAccount = {
   type: process.env.TYPE || "",
   project_id: process.env.PROJECTID || "",
