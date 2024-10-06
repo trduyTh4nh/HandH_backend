@@ -86,6 +86,7 @@ require("./db/init.mongo");
 import mainRouter from "./router/main/index";
 app.use("/", mainRouter);
 
+// welcome
 app.get("/", (req: Request, res: Response) => {
   res.send(`
     <!DOCTYPE html>

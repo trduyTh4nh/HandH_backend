@@ -80,15 +80,14 @@ NODE: TASK FOR PRODUCT
 
 --------------- HOT FIX TÌM THẤY BUG SAU KHI DEPLOY ------------------------
 
--- HOT BUG: B1 [API Reresh token] khi call api refresh token token cũ vẫn dùng được 
+-- HOT BUG : B1 [API Reresh token] khi call api refresh token token cũ vẫn dùng được 
 
--- HOT BUG: B2 [API Public product] khi public product nhớ kiểm tra xem nó có đang là draft hay không nếu trạng thái đang là draft thì không cho public
+-- HOT BUG : B2 [API Public product] khi public product nhớ kiểm tra xem nó có đang là draft hay không nếu trạng thái đang là draft thì không cho public
  và ngược lại nếu trạng thái là draft thì được public. Còn 1 cái nữa là dữ liệu trên database thì được cập nhật ở field isPublished là true nhưng data trả về k đc cập nhật
 
--- HOT BUG: B3 [API Draft product] khi draft kiểm tra xem nó có đang được public không nếu đang được public thì không được draft phải unpublich mới được draft
+-- HOT BUG : B3 [API Draft product] khi draft kiểm tra xem nó có đang được public không nếu đang được public thì không được draft phải unpublich mới được draft
   và ngược lại nếu trang thái là unpublich thì được draft. Còn 1 cái nữa là dữ liệu trên database thì được cập nhật ở field isDraft là true nhưng data trả về k đc cập nhật
 
 NOTE: Cái B2 và B3 có thể fix đơn giản bằng cách check trên FE nếu đang Darf thì disable nút public và ngược lại.
 
--- HOT BUG: B4 Thêm API add image minh họa cho sản phẩm
- 
+-- HOT FIX: B4 Thêm API add image minh họa cho sản phẩm

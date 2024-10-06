@@ -6,17 +6,17 @@ import { authentication, checkRoleAd } from "../../auth/auth";
 const router = Router();
 
 router.get("/search", asyncHandler(productController.searchProduct));
-
-router.use(authentication);
-router.get(
-  "/searchProductFilter",
-  asyncHandler(productController.searchFilterProduct)
-);
 router.get("/", asyncHandler(productController.getAllProduct));
 router.get(
   "/getProductPage/:page",
   asyncHandler(productController.getProductPerPage)
 );
+router.use(authentication);
+router.get(
+  "/searchProductFilter",
+  asyncHandler(productController.searchFilterProduct)
+);
+
 router.use(checkRoleAd);
 router.put(
   "/unPublicProduct/:id",
