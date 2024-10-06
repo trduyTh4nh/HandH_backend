@@ -78,52 +78,17 @@ NODE: TASK FOR PRODUCT
 
 
 
-
------ config firebase
-
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAGGK6OqFMa3DMmRHfR9kbJLVuLJ_SRM-I",
-  authDomain: "handh-storage.firebaseapp.com",
-  projectId: "handh-storage",
-  storageBucket: "handh-storage.appspot.com",
-  messagingSenderId: "446759787230",
-  appId: "1:446759787230:web:2b4a580ab4a8527512c04f",
-  measurementId: "G-935J0S4121"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 --------------- HOT FIX TÌM THẤY BUG SAU KHI DEPLOY ------------------------
 
--- HOT BUG: [API Reresh token] khi call api refresh token token cũ vẫn dùng được 
+-- HOT BUG: B1 [API Reresh token] khi call api refresh token token cũ vẫn dùng được 
 
--- HOT BUG: [API Public product] khi public product nhớ kiểm tra xem nó có đang là draft hay không nếu trạng thái đang là draft thì không cho public
+-- HOT BUG: B2 [API Public product] khi public product nhớ kiểm tra xem nó có đang là draft hay không nếu trạng thái đang là draft thì không cho public
  và ngược lại nếu trạng thái là draft thì được public. Còn 1 cái nữa là dữ liệu trên database thì được cập nhật ở field isPublished là true nhưng data trả về k đc cập nhật
 
--- HOT BUG: [API Draft product] khi draft kiểm tra xem nó có đang được public không nếu đang được public thì không được draft phải unpublich mới được draft
+-- HOT BUG: B3 [API Draft product] khi draft kiểm tra xem nó có đang được public không nếu đang được public thì không được draft phải unpublich mới được draft
   và ngược lại nếu trang thái là unpublich thì được draft. Còn 1 cái nữa là dữ liệu trên database thì được cập nhật ở field isDraft là true nhưng data trả về k đc cập nhật
 
--- 
+NOTE: Cái B2 và B3 có thể fix đơn giản bằng cách check trên FE nếu đang Darf thì disable nút public và ngược lại.
+
+-- HOT BUG: B4 Thêm API add image minh họa cho sản phẩm
+ 

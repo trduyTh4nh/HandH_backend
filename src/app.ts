@@ -85,11 +85,50 @@ require("./db/init.mongo");
 // init router
 import mainRouter from "./router/main/index";
 app.use("/", mainRouter);
-app.get("/hello", (req: Request, res: Response, next: NextFunction) => {
-  res.send({ message: "Hello" });
-});
+
 app.get("/", (req: Request, res: Response) => {
-  res.send({ message: "HELLO HANDH" });
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Welcome to Steve's Backend Server</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+        .container {
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          text-align: center;
+        }
+        h1 {
+          color: #333;
+        }
+        p {
+          color: #666;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Welcome to Steve's Backend Server</h1>
+        <p>This is a backend server built by Steve (Trần Duy Thanh).</p>
+        <p>It is powered by Node.js and Express.</p>
+      </div>
+    </body>
+    </html>
+  `);
 });
 
 // handling error
