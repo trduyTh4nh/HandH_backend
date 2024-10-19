@@ -2,6 +2,7 @@ import { identity, size } from "lodash";
 import { BadRequestError } from "../core/error.response";
 import {
   addColorProductFunc,
+  addImageForProductFunc,
   addSizeProductFunc,
   crearteProductFunc,
   deleteProductFunc,
@@ -201,8 +202,17 @@ class ProductService {
     if (!n || n < 0) {
       throw new BadRequestError("Need number product!");
     }
-
     return await getNProductLastestFunc(n);
+  }
+
+  static async addImageForProduct(file: any, idProduct: string): Promise<any> {
+    if (!file) {
+      throw new BadRequestError("Can not find file image");
+    }
+    if (!idProduct) {
+      throw new BadRequestError("Can not find id product");
+    }
+    return await addImageForProductFunc(file, idProduct);
   }
 }
 

@@ -57,4 +57,8 @@ router.post(
   asyncHandler(productController.updateImageForProduct)
 );
 
+router.put(
+  "/addImageProduct/:id",
+  asyncHandler(productController.addImageForProduct)
+);
 export default router;

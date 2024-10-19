@@ -392,6 +392,15 @@ const getNProductLastestFunc = async (n: number) => {
   return result;
 };
 
+const addImageForProductFunc = async (file: any, idProduct: string) => {
+  const product = await ProductModel.findOne({ _id: idProduct });
+  if (!product) {
+    throw new BadRequestError("Not found product!");
+  }
+  const result = await uploadImage(file);
+  product.product_images.push(result.publicUrl);
+  return await product.save();
+};
 export {
   getAllProducts,
   crearteProductFunc,
@@ -412,4 +421,5 @@ export {
   updateImageForProductFunc,
   searchProductByFilterFunc,
   getNProductLastestFunc,
+  addImageForProductFunc,
 };

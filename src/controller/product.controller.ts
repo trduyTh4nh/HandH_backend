@@ -221,6 +221,20 @@ class ProductController {
       metadata: await ProductService.getNProductLastest(number),
     }).send(res);
   };
+
+  addImageForProduct = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const idPro = req.params.id;
+    const file = req.files[0];
+
+    new SuccessResponse({
+      message: "add image description for prouct successfully!",
+      metadata: await ProductService.addImageForProduct(file, idPro),
+    }).send(res);
+  };
 }
 
 export default new ProductController();
