@@ -122,7 +122,17 @@ class ProductController {
 
   addColorProduct = async (req: Request, res: Response, next: NextFunction) => {
     const id: string = req.body.idProduct;
-    const color: IColorProductVariation = req.body.dataColor;
+    const color_code = req.body.color_code;
+    const color_price = req.body.color_price;
+    const color_isPicked = req.body.color_isPicked;
+    const file = req.files[0];
+
+    const color: IColorProductVariation = {
+      color_code: color_code,
+      color_price: color_price,
+      color_isPicked: color_isPicked,
+      image_product_col: file,
+    };
 
     new SuccessResponse({
       message: "Add color successfully!",
@@ -196,6 +206,19 @@ class ProductController {
         0,
         0
       ), // trước mắt là lọc chưa phân trang
+    }).send(res);
+  };
+
+  getNProductLastest = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const number = req.params.num;
+
+    new SuccessResponse({
+      message: `Get ${number} latest product successfully!`,
+      metadata: await ProductService.getNProductLastest(number),
     }).send(res);
   };
 }

@@ -1,3 +1,4 @@
+import { StringNullableChain } from "lodash";
 import mongoose, { Document, Types } from "mongoose";
 
 export interface IUserAddress {
@@ -81,6 +82,7 @@ export interface IColorProductVariation {
   color_code: string;
   color_price: number;
   color_isPicked: boolean;
+  image_product_col: string;
 }
 
 export interface ISizeProductVarication {
@@ -147,4 +149,19 @@ export interface IPaymentHistory extends Document {
   billingAddress: IUserAddress;
   currency: string;
   description?: string;
+}
+
+export interface IOrder extends Document {
+  _id?: Types.ObjectId;
+  userId: Types.ObjectId;
+  products: IProduct[];
+  totalPrice: Number;
+  shippingAddress: IUserAddress;
+  paymentMethod: string;
+  orderStatus: string;
+  shippingCost: Number;
+  taxAmount: Number;
+  discount: Number;
+  orderDate: Date;
+  notes: string;
 }

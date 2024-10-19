@@ -7,6 +7,7 @@ import {
   deleteProductFunc,
   draftProductFunc,
   getAllProducts,
+  getNProductLastestFunc,
   getPageProducts,
   getProductById,
   publicProductFunc,
@@ -194,6 +195,14 @@ class ProductService {
     }
 
     return await searchProductByFilterFunc(filter, pageFound, pageCount);
+  }
+
+  static async getNProductLastest(n: number): Promise<any> {
+    if (!n || n < 0) {
+      throw new BadRequestError("Need number product!");
+    }
+
+    return await getNProductLastestFunc(n);
   }
 }
 

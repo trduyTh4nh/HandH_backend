@@ -7,6 +7,7 @@ import { updateAvatarForUser } from "../../models/repos/user.repo";
 
 const router = Router();
 
+router.get("/getAllBanner", asyncHandler(uploadController.getAllBanner));
 router.use(authentication);
 router.post("/uploadBanner", asyncHandler(uploadController.uploadBanner));
 router.delete("/deleteBanner/:id", asyncHandler(uploadController.deleteBanner));
@@ -15,5 +16,4 @@ router.put(
   "/unActiveBanner/:id",
   asyncHandler(uploadController.unActiveBanner)
 );
-router.get("/getAllBanner", asyncHandler(uploadController.getAllBanner));
 export default router;

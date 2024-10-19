@@ -15,6 +15,7 @@ class UploadService {
     }
 
     const result: any = await uploadImage(file);
+
     return await Banner.create({
       url: result.publicUrl,
       title: title,

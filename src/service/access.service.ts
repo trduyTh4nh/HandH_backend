@@ -52,7 +52,7 @@ class AccessService {
         const privateKey = crypto.randomBytes(64).toString("hex");
         const publicKey = crypto.randomBytes(64).toString("hex");
 
-        console.log({ privateKey, publicKey });
+        // console.log({ privateKey, publicKey });
 
         const idUser = new mongoose.Types.ObjectId(user._id + "");
 
@@ -75,7 +75,7 @@ class AccessService {
           privateKey,
           publicKey
         );
-        console.log(`Create token success::`, tokens);
+        // console.log(`Create token success::`, tokens);
 
         const result: any = {
           email: user.email,
@@ -124,7 +124,7 @@ class AccessService {
 
     const idUser: any = foudnUser._id;
 
-    console.log("User id: ", idUser);
+    // console.log("User id: ", idUser);
     const tokens: IKeyTokenModel = await createTokenPair(
       { user: idUser, email: email },
       privateKey,
@@ -138,7 +138,7 @@ class AccessService {
       user: idUser,
     });
 
-    const fieldUser: string[] = ["_id", "email", "name", "userAddress"];
+    const fieldUser: string[] = ["_id", "email", "name", "userAddress", "role"];
 
     return {
       user: getInfoData({ fields: fieldUser, object: foudnUser }),
@@ -148,7 +148,7 @@ class AccessService {
 
   static async logout(keyStoreId: any): Promise<any> {
     const deleteKeyStore = await KeyTokenService.removeKeyById(keyStoreId);
-    console.log({ deleteKeyStore });
+    // console.log({ deleteKeyStore });
     return deleteKeyStore;
   }
 

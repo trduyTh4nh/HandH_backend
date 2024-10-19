@@ -209,6 +209,10 @@ const addColorProductFunc = async (
     throw new BadRequestError("The code already exist!");
   }
 
+  const result: any = await uploadImage(color.image_product_col);
+
+  color["image_product_col"] = result.publicUrl;
+
   findProductUpdate.product_colors.push(color);
 
   const updatedProduct = await findProductUpdate.save();
@@ -382,6 +386,12 @@ const searchProductByFilterFunc = async (
   return filterProduct;
 };
 
+const getNProductLastestFunc = async (n: number) => {
+  const result = await ProductModel.find({}).sort({ createdAt: -1 }).limit(n);
+  console.log("result: ", result);
+  return result;
+};
+
 export {
   getAllProducts,
   crearteProductFunc,
@@ -401,4 +411,5 @@ export {
   searchProductFunc,
   updateImageForProductFunc,
   searchProductByFilterFunc,
+  getNProductLastestFunc,
 };

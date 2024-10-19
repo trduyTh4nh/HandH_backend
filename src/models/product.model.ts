@@ -60,6 +60,7 @@ export const productSchema: Schema = new Schema<IProduct>(
           color_code: { type: String, required: true },
           color_price: { type: Number, required: true },
           color_isPicked: { type: Boolean, default: false },
+          image_product_col: { type: String },
         },
       ],
     },

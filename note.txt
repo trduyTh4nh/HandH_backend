@@ -57,7 +57,7 @@ NODE: TASK FOR PRODUCT
 
 16. document banner CRUD -- 
 
-17. fliter sản phẩm --
+17. fliter sản phẩm -- 
 
 18. api wish list - ĐANG LÀM CÁI NÀY
 (khi lấy toàn bộ sản phẩm ra chỉ cần so sánh nó với các phẩm trong wishlist nếu có tồn tại trong wishlist thì chuyển icon favorite thành màu hồng )
@@ -91,3 +91,20 @@ NODE: TASK FOR PRODUCT
 NOTE: Cái B2 và B3 có thể fix đơn giản bằng cách check trên FE nếu đang Darf thì disable nút public và ngược lại.
 
 -- HOT FIX: B4 Thêm API add image minh họa cho sản phẩm
+
+
+------------------------------------------------------
+
+CÁC API CÓ THỂ CÓ ĐỂ TƯƠNG TÁC VỚI ĐƠN hàng
+1. tạo đơn hàng
+2. cập nhật đơn hàng
+3. xem chi tiết đơn hàng
+4. hủy đơn hàng
+5. theo dõi trạng thái đơn hàng
+6. xử lý thanh toán
+7. quản lý giao hàng
+8. chỉnh sửa phương thức thanh toán
+9. hoàn tiền
+10. in hóa đơn
+11. lưu lịch sử đơn hàng
+12. thông báo đơn hàng
