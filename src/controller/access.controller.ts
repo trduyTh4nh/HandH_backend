@@ -108,6 +108,21 @@ class AccessController {
       metadata: await AccessService.updateImageForUser(idUser, file),
     }).send(res);
   };
+
+  getUser = async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+    new SuccessResponse({
+      message: "Get user successfully!",
+      metadata: await AccessService.getUserById(userId),
+    }).send(res);
+  };
+
+  getAllUser = async (req: Request, res: Response, next: NextFunction) => {
+    new SuccessResponse({
+      message: "Get user successfully!",
+      metadata: await AccessService.getAllUser(),
+    }).send(res);
+  };
 }
 
 export default new AccessController();

@@ -91,10 +91,19 @@ const updateAvatarForUser = async (
   return await foundUserToUpdate.save();
 };
 
+const getAllUserFunc = async () => {
+  const users = await User.find({
+    role: process.env.ROLEUSER,
+  });
+
+  return users;
+};
+
 export {
   findUserByEmail,
   findUserByEmail_,
   findUserById,
   updateInfoUser,
   updateAvatarForUser,
+  getAllUserFunc,
 };

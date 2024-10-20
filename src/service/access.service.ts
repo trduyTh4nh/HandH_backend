@@ -8,6 +8,7 @@ import {
   findUserByEmail,
   findUserByEmail_,
   findUserById,
+  getAllUserFunc,
   updateAvatarForUser,
   updateInfoUser,
 } from "../models/repos/user.repo";
@@ -330,6 +331,18 @@ class AccessService {
 
   static async updateImageForUser(idUser: string, image: any): Promise<any> {
     return await updateAvatarForUser(idUser, image);
+  }
+
+  static async getUserById(idUser: string): Promise<any> {
+    const user = await findUserById(idUser);
+    if (!user) {
+      throw new BadRequestError("Can not find user");
+    }
+    return user;
+  }
+
+  static async getAllUser(): Promise<any> {
+    return await getAllUserFunc();
   }
 }
 
