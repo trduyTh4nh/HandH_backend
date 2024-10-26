@@ -9,6 +9,7 @@ import {
 } from "../../types/type.all";
 import { _idConverted, uploadImage } from "../../utils";
 import ProductModel from "../product.model";
+import Category from "../category.model";
 
 const getAllProducts = async (): Promise<IProduct[] | null> => {
   const products = await ProductModel.find({});
@@ -401,6 +402,20 @@ const addImageForProductFunc = async (file: any, idProduct: string) => {
   product.product_images.push(result.publicUrl);
   return await product.save();
 };
+
+const getProductFromCateFunc = async (idCate: string) => {
+  // const findCategory = await Category.findOne({ _id: idCate });
+
+  // if (!findCategory) {
+  //   throw new BadRequestError("Not found this categories!");
+  // }
+
+  const result = await ProductModel.find({
+    product_category: idCate,
+  });
+  return result;
+};
+
 export {
   getAllProducts,
   crearteProductFunc,
@@ -422,4 +437,5 @@ export {
   searchProductByFilterFunc,
   getNProductLastestFunc,
   addImageForProductFunc,
+  getProductFromCateFunc,
 };

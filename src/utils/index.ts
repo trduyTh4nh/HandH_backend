@@ -73,6 +73,24 @@ async function uploadImage(file: any) {
     .catch((error) => error);
 }
 
+async function deleteImageOnBucket(fileName: string) {
+  // const fileName = findProductToUpdate.product_thumb?.split("/").pop();
+  console.log("DEBUG file name: ", fileName);
+
+  const file = bucket.file(fileName);
+
+  if (file) {
+    await file
+      .delete()
+      .then(() => {
+        console.log(`File ${fileName} deleted successfully.`);
+      })
+      .catch((error: any) => {
+        console.error("Error deleting file from Firebase Storage:", error);
+      });
+  }
+}
+
 export {
   errorWriteDown,
   getInfoData,
@@ -80,4 +98,5 @@ export {
   adminPlayer,
   _idConverted,
   uploadImage,
+  deleteImageOnBucket,
 };

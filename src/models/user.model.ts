@@ -13,7 +13,7 @@ export const userAddressSchema: Schema = new Schema({
   apartmentNumber: { type: String },
 });
 
-const userSchema: Schema = new Schema<IUser>(
+export const userSchema: Schema = new Schema<IUser>(
   {
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },

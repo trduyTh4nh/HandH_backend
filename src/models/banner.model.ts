@@ -20,6 +20,9 @@ const bannerSchema: Schema = new Schema<IBanner>(
     content: {
       type: String,
     },
+    products: {
+      type: [],
+    },
   },
   {
     collection: COLLECTION_NAME,

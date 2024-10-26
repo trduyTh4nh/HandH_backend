@@ -74,6 +74,20 @@ class UploadService {
   static async getAllBanner(): Promise<any> {
     return await Banner.find();
   }
+
+  static async updateProductForBanner(
+    idBanner: string,
+    product: string[]
+  ): Promise<any> {
+    const findBanner = await Banner.findOne({ _id: idBanner });
+
+    if (!findBanner) {
+      throw new BadRequestError("Not found banner to add product!");
+    }
+
+    findBanner.products = [...findBanner.products, ...product];
+    return await findBanner.save();
+  }
 }
 
 export default UploadService;

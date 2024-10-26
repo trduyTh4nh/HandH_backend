@@ -39,6 +39,20 @@ class UploadController {
       metadata: await UploadSerivice.getAllBanner(),
     }).send(res);
   };
+
+  addProductForBanner = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const idBanner = req.body.idBanner;
+    const products = req.body.products;
+
+    new SuccessResponse({
+      message: "Add product for banner successfully!",
+      metadata: await UploadSerivice.updateProductForBanner(idBanner, products),
+    }).send(res);
+  };
 }
 
 export default new UploadController();

@@ -8,7 +8,9 @@ import category from "../category/index";
 import cart from "../cart_/index";
 import upload from "../upload/index";
 import wish from "../wishlist/index";
+import blog from "../blog/index";
 
+router.use("/v1/api/blog", blog);
 router.use("/v1/api/wishlist", wish);
 router.use("/v1/api/upload", upload);
 router.use("/v1/api/access", access);

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authentication } from "../../auth/auth";
+import { authentication, checkRoleAd } from "../../auth/auth";
 import { asyncHandler } from "../../helper/asyncHandler";
 import uploadController from "../../controller/upload.controller";
 import { upload } from "../../configs/storage";
@@ -9,6 +9,12 @@ const router = Router();
 
 router.get("/getAllBanner", asyncHandler(uploadController.getAllBanner));
 router.use(authentication);
+router.use(checkRoleAd);
+
+router.put(
+  "/addProductToBanner",
+  asyncHandler(uploadController.addProductForBanner)
+);
 router.post("/uploadBanner", asyncHandler(uploadController.uploadBanner));
 router.delete("/deleteBanner/:id", asyncHandler(uploadController.deleteBanner));
 router.put("/activeBanner/:id", asyncHandler(uploadController.activeBanner));

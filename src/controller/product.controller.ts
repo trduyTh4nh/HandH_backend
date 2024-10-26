@@ -235,6 +235,26 @@ class ProductController {
       metadata: await ProductService.addImageForProduct(file, idPro),
     }).send(res);
   };
+
+  getProductFromCate = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const cate: string = req.body.idCate;
+    new SuccessResponse({
+      message: "Get product from category successfully!",
+      metadata: await ProductService.getProductFromCate(cate),
+    }).send(res);
+  };
+
+  getAProduct = async (req: Request, res: Response, next: NextFunction) => {
+    const id = req.params.id;
+    new SuccessResponse({
+      message: "Get product successfully!",
+      metadata: await ProductService.getAProduct(id),
+    }).send(res);
+  };
 }
 
 export default new ProductController();

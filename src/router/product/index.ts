@@ -5,6 +5,7 @@ import { authentication, checkRoleAd } from "../../auth/auth";
 
 const router = Router();
 
+router.get("/getAProduct/:id", asyncHandler(productController.getAProduct));
 router.get(
   "/getLastestProduct/:num",
   asyncHandler(productController.getNProductLastest)
@@ -15,7 +16,12 @@ router.get(
   "/getProductPage/:page",
   asyncHandler(productController.getProductPerPage)
 );
+router.get(
+  "/getProductCate",
+  asyncHandler(productController.getProductFromCate)
+);
 router.use(authentication);
+
 router.get(
   "/searchProductFilter",
   asyncHandler(productController.searchFilterProduct)

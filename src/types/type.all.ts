@@ -107,6 +107,7 @@ export interface IBanner extends Document {
   isActive: boolean;
   title: string;
   content: string;
+  products: string[];
 }
 
 export interface IWishList extends Document {
@@ -165,3 +166,28 @@ export interface IOrder extends Document {
   orderDate: Date;
   notes: string;
 }
+
+export interface IBlogPost extends Document {
+  _id?: Types.ObjectId;
+  content: string;
+  author: string;
+  images: string[];
+  datePosted: string;
+  dateEdited?: string;
+}
+
+// //mẫu:
+// const sampleData: IBlogPost[] = [
+//   {
+//     _id: "dikgaoidgjiadjfa",
+//     content: "Sample blog",
+//     author: {
+//       email: "test@gmail.com",
+//       name: "test",
+//       phone: "...",
+//       password: "shhh....",
+//     },
+//     images: ["imageLink1", "imageLink2", "...."],
+//     datePosted: "2024-10-21",
+//   },
+// ];

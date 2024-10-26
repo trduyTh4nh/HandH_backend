@@ -7,10 +7,12 @@ import {
   crearteProductFunc,
   deleteProductFunc,
   draftProductFunc,
+  findProductById,
   getAllProducts,
   getNProductLastestFunc,
   getPageProducts,
   getProductById,
+  getProductFromCateFunc,
   publicProductFunc,
   removeColorProductFunc,
   removeSizeProductFunc,
@@ -213,6 +215,21 @@ class ProductService {
       throw new BadRequestError("Can not find id product");
     }
     return await addImageForProductFunc(file, idProduct);
+  }
+
+  static async getProductFromCate(idCate: string): Promise<any> {
+    if (!idCate) {
+      throw new BadRequestError("Missing categories");
+    }
+    return await getProductFromCateFunc(idCate);
+  }
+
+  static async getAProduct(idProduct: string): Promise<any> {
+    if (!idProduct) {
+      throw new BadRequestError("Missing product to get");
+    }
+
+    return await findProductById(idProduct);
   }
 }
 
