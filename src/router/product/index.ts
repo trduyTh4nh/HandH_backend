@@ -17,7 +17,7 @@ router.get(
   asyncHandler(productController.getProductPerPage)
 );
 router.get(
-  "/getProductCate",
+  "/getProductCate/:id",
   asyncHandler(productController.getProductFromCate)
 );
 router.use(authentication);

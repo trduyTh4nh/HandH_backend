@@ -241,7 +241,7 @@ class ProductController {
     res: Response,
     next: NextFunction
   ) => {
-    const cate: string = req.body.idCate;
+    const cate: string = req.params.id;
     new SuccessResponse({
       message: "Get product from category successfully!",
       metadata: await ProductService.getProductFromCate(cate),
