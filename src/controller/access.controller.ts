@@ -68,13 +68,16 @@ class AccessController {
 
   changePassword = async (req: Request, res: Response, next: NextFunction) => {
     const user: IUser = req.headerData?.user || ({} as IUser);
+
+    const email = req.body.email;
+    console.log(user);
     const newPass: string = req.body.newPass;
     const currentPass: string = req.body.currentPass;
     const confirmPass: string = req.body.confirmPass;
     new SuccessResponse({
       message: "Change password successfully!",
       metadata: await AccessService.changePassword(
-        user.email,
+        email,
         currentPass,
         newPass,
         confirmPass
