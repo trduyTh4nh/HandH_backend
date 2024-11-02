@@ -335,10 +335,11 @@ const searchProductByFilterFunc = async (
   const query: any = {};
 
   // lọc theo giá tối đa và giá tối thiểu
-  if (maximumPrice && minimumPrice) {
-    query.product_price = {};
-    if (maximumPrice) query.product_price.$lte = maximumPrice;
-    if (minimumPrice) query.product_price.$gte = minimumPrice;
+  console.log(maximumPrice);
+  console.log(minimumPrice);
+  if (minimumPrice !== undefined && maximumPrice !== undefined) {
+    query.product_price = { ...query.product_price, $gte: minimumPrice };
+    query.product_price = { ...query.product_price, $lte: maximumPrice };
   }
 
   // Lọc theo size
@@ -361,11 +362,16 @@ const searchProductByFilterFunc = async (
   }
 
   // Sắp xếp theo giá
-  if (isSortByPrice) {
-    filterProductQuery = filterProductQuery.sort({ product_price: 1 });
-  } else {
-    filterProductQuery = filterProductQuery.sort({ product_price: -1 });
+  if (isSortByPrice !== undefined) {
+    filterProductQuery = filterProductQuery.sort({
+      product_price: isSortByPrice ? 1 : -1,
+    });
   }
+  // if (isSortByPrice) {
+  //   filterProductQuery = filterProductQuery.sort({ product_price: 1 });
+  // } else {
+  //   filterProductQuery = filterProductQuery.sort({ product_price: -1 });
+  // }
 
   // Lọc theo giá cụ thể
 
@@ -386,7 +392,11 @@ const searchProductByFilterFunc = async (
   filterProductQuery = filterProductQuery.skip(skip).limit(take);
 
   const filterProduct = await filterProductQuery.exec();
-  return filterProduct;
+  return {
+    filterProduct: filterProduct,
+    skip: skip,
+    take: take,
+  };
 };
 
 const getNProductLastestFunc = async (n: number) => {
