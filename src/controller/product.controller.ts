@@ -198,13 +198,16 @@ class ProductController {
     res: Response,
     next: NextFunction
   ) => {
+    const skip = req.body.skip;
+    const take = req.body.take;
+
     const dataFilter: ITypeFilter = req.body.filter;
     new SuccessResponse({
       message: "Result search!!",
       metadata: await ProductService.searchProductByFilterService(
         dataFilter,
-        0,
-        0
+        skip,
+        take
       ), // trước mắt là lọc chưa phân trang
     }).send(res);
   };

@@ -20,12 +20,13 @@ router.get(
   "/getProductCate/:id",
   asyncHandler(productController.getProductFromCate)
 );
-router.use(authentication);
 
-router.get(
+router.post(
   "/searchProductFilter",
   asyncHandler(productController.searchFilterProduct)
 );
+
+router.use(authentication);
 
 router.use(checkRoleAd);
 router.put(

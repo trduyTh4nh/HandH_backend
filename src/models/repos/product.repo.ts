@@ -319,8 +319,8 @@ const updateImageForProductFunc = async (idPro: string, image: any) => {
 
 const searchProductByFilterFunc = async (
   filter: ITypeFilter,
-  pageNumber: number,
-  pagesize: number
+  skip: number,
+  take: number
 ): Promise<any> => {
   const {
     latestProduct,
@@ -353,7 +353,7 @@ const searchProductByFilterFunc = async (
     query["product_colors.color_code"] = { $in: colorsFilter };
   }
 
-  let filterProductQuery = ProductModel.find(query);
+  let filterProductQuery = ProductModel.find({ ...query, isPublished: true });
 
   // xếp theo sản phẩm mới nhất
   if (latestProduct) {
@@ -382,8 +382,10 @@ const searchProductByFilterFunc = async (
   }
 
   // thiếu phân trang
-  const filterProduct = await filterProductQuery.exec();
 
+  filterProductQuery = filterProductQuery.skip(skip).limit(take);
+
+  const filterProduct = await filterProductQuery.exec();
   return filterProduct;
 };
 

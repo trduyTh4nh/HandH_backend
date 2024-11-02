@@ -32,7 +32,6 @@ import {
 } from "../types/type.all";
 
 class ProductService {
-  // nhớ phân trang khi lấy all product về
   static async getAllProduct(): Promise<any> {
     const listProduct = await getAllProducts();
     return listProduct;
@@ -182,8 +181,8 @@ class ProductService {
 
   static async searchProductByFilterService(
     filter: ITypeFilter,
-    numPage: number,
-    pageSize: number
+    skip: number,
+    take: number
   ): Promise<any> {
     const { maximumPrice, minimumPrice } = filter;
 
@@ -191,13 +190,11 @@ class ProductService {
     //   throw new BadRequestError("Can not find page!");
     // }
 
-    const pageFound: number = numPage >= 1 ? numPage : 1;
-    const pageCount = pageSize ? pageSize : 0;
     if (maximumPrice < minimumPrice) {
       throw new BadRequestError("maximum price must larger than minimum price");
     }
 
-    return await searchProductByFilterFunc(filter, pageFound, pageCount);
+    return await searchProductByFilterFunc(filter, skip, take);
   }
 
   static async getNProductLastest(n: number): Promise<any> {

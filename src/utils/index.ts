@@ -75,7 +75,7 @@ async function uploadImage(file: any) {
 
 async function deleteImageOnBucket(fileName: string) {
   // const fileName = findProductToUpdate.product_thumb?.split("/").pop();
-  console.log("DEBUG file name: ", fileName);
+  // console.log("DEBUG file name: ", fileName);
 
   const file = bucket.file(fileName);
 

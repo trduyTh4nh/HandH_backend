@@ -17,10 +17,6 @@ class BlogService {
     updateBlog: any,
     arrPositionImage: string
   ): Promise<any> {
-    console.log("idBlog: ", idBlog);
-    console.log("updateBlog: ", updateBlog);
-    console.log("arrPositionImage: ", JSON.parse(arrPositionImage));
-
     return await updateBlogV2(idBlog, updateBlog, JSON.parse(arrPositionImage));
   }
 
