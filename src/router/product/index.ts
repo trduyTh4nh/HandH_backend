@@ -5,6 +5,10 @@ import { authentication, checkRoleAd } from "../../auth/auth";
 
 const router = Router();
 
+router.post(
+  "/getProductPage",
+  asyncHandler(productController.getProductWithPage)
+);
 router.get("/getAProduct/:id", asyncHandler(productController.getAProduct));
 router.get(
   "/getLastestProduct/:num",

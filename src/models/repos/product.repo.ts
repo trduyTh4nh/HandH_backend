@@ -399,6 +399,11 @@ const searchProductByFilterFunc = async (
   };
 };
 
+const getProductWithPageFunc = async (skip: number, take: number) => {
+  const product = await ProductModel.find().skip(skip).limit(take);
+  return product;
+};
+
 const getNProductLastestFunc = async (n: number) => {
   const result = await ProductModel.find({}).sort({ createdAt: -1 }).limit(n);
   console.log("result: ", result);
@@ -450,4 +455,5 @@ export {
   getNProductLastestFunc,
   addImageForProductFunc,
   getProductFromCateFunc,
+  getProductWithPageFunc,
 };

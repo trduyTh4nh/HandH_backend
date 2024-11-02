@@ -13,6 +13,7 @@ import {
   getPageProducts,
   getProductById,
   getProductFromCateFunc,
+  getProductWithPageFunc,
   publicProductFunc,
   removeColorProductFunc,
   removeSizeProductFunc,
@@ -227,6 +228,10 @@ class ProductService {
     }
 
     return await findProductById(idProduct);
+  }
+
+  static async getProductWithPage(skip: number, take: number): Promise<any> {
+    return await getProductWithPageFunc(skip, take);
   }
 }
 

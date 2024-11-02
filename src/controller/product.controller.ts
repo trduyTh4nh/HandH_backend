@@ -258,6 +258,19 @@ class ProductController {
       metadata: await ProductService.getAProduct(id),
     }).send(res);
   };
+
+  getProductWithPage = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { skip, take } = req.body;
+
+    new SuccessResponse({
+      message: "Get product successfully!",
+      metadata: await ProductService.getProductWithPage(skip, take),
+    }).send(res);
+  };
 }
 
 export default new ProductController();
