@@ -53,6 +53,20 @@ class UploadController {
       metadata: await UploadSerivice.updateProductForBanner(idBanner, products),
     }).send(res);
   };
+
+  updateModeBanner = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const bannerId = req.body.idBanner;
+    const mode = req.body.mode;
+
+    new SuccessResponse({
+      message: "Update mode banner!",
+      metadata: await UploadSerivice.updateModeBanner(bannerId, mode),
+    }).send(res);
+  };
 }
 
 export default new UploadController();

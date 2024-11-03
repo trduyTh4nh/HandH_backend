@@ -22,4 +22,8 @@ router.put(
   "/unActiveBanner/:id",
   asyncHandler(uploadController.unActiveBanner)
 );
+router.put(
+  "/updateModeBanner",
+  asyncHandler(uploadController.updateModeBanner)
+);
 export default router;

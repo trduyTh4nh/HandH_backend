@@ -88,6 +88,21 @@ class UploadService {
     findBanner.products = [...findBanner.products, ...product];
     return await findBanner.save();
   }
+
+  static async updateModeBanner(idBanner: string, mode: boolean): Promise<any> {
+    const foundBanner = await Banner.findOne({ _id: idBanner });
+
+    if (!foundBanner) {
+      throw new BadRequestError("Not found banner to update!");
+    }
+
+    const resultUpdate = await Banner.findOneAndUpdate(
+      { _id: idBanner },
+      { isMain: mode }
+    );
+
+    return resultUpdate;
+  }
 }
 
 export default UploadService;
