@@ -108,6 +108,7 @@ export interface IBanner extends Document {
   title: string;
   content: string;
   products: string[];
+  isMain: boolean;
 }
 
 export interface IWishList extends Document {

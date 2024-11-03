@@ -23,6 +23,10 @@ const bannerSchema: Schema = new Schema<IBanner>(
     products: {
       type: [],
     },
+    isMain: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     collection: COLLECTION_NAME,
