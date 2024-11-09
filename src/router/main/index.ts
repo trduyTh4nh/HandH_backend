@@ -9,7 +9,9 @@ import cart from "../cart_/index";
 import upload from "../upload/index";
 import wish from "../wishlist/index";
 import blog from "../blog/index";
+import order from "../order/index";
 
+router.use("/v1/api/order", order);
 router.use("/v1/api/blog", blog);
 router.use("/v1/api/wishlist", wish);
 router.use("/v1/api/upload", upload);

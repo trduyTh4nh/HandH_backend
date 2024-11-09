@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { ICart, ICartDetail } from "../types/type.all";
-import ProductModel from "./product.model";
+import ProductModel, { productSchema } from "./product.model";
 
 const COLLECTION_NAME: string = "cart";
 const DOCUMENT_NAME: string = "cart";
@@ -12,8 +12,7 @@ const cartDetailSchema: Schema = new Schema<ICartDetail>({
     default: 1,
   },
   product: {
-    type: mongoose.Schema.ObjectId,
-    ref: "product",
+    type: Object,
     required: true,
   },
   priceCartDetail: {
@@ -48,7 +47,7 @@ const cartSchema: Schema = new Schema<ICart>(
     cart_status: {
       type: String,
       required: true,
-      enum: ["active", "completed", "failed", "pending"],
+      enum: ["active", "completed", "failed", "pending", "purchased"],
       default: "active",
     },
     cart_total_price: {

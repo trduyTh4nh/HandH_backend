@@ -11,24 +11,6 @@ export interface IUserAddress {
   apartmentNumber?: string;
 }
 
-export interface ICart extends Document {
-  _id?: Types.ObjectId;
-  cart_user: mongoose.Types.ObjectId;
-  cart_products: ICartDetail[];
-  cart_count: number;
-  cart_status: string;
-  cart_total_price: number;
-}
-
-export interface ICartDetail extends Document {
-  _id?: Types.ObjectId;
-  quantity: number;
-  product: IProduct;
-  priceCartDetail: number;
-  size: string;
-  color: string;
-}
-
 export interface IUser extends Document {
   _id?: mongoose.Types.ObjectId;
   email: string;
@@ -153,19 +135,50 @@ export interface IPaymentHistory extends Document {
   description?: string;
 }
 
+// ----------------
+
+export interface ICart extends Document {
+  _id?: Types.ObjectId;
+  cart_user: mongoose.Types.ObjectId;
+  cart_products: ICartDetail[];
+  cart_count: number;
+  cart_status: string;
+  cart_total_price: number;
+}
+
+export interface ICartDetail extends Document {
+  _id?: Types.ObjectId;
+  quantity: number;
+  product: any;
+  priceCartDetail: number;
+  size: string;
+  color: string;
+  isPicked: boolean;
+}
+
 export interface IOrder extends Document {
   _id?: Types.ObjectId;
   userId: Types.ObjectId;
-  products: IProduct[];
-  totalPrice: Number;
+  products: IOrderProduct[];
+  cartId?: Types.ObjectId;
+  totalPrice: number;
   shippingAddress: IUserAddress;
   paymentMethod: string;
   orderStatus: string;
-  shippingCost: Number;
-  taxAmount: Number;
-  discount: Number;
+  shippingCost: number;
+  taxAmount: number;
+  discount: number;
   orderDate: Date;
   notes: string;
+}
+
+// Define the product structure within an order
+export interface IOrderProduct {
+  productId: Types.ObjectId;
+  quantity: number;
+  priceAtPurchase: number;
+  size?: string;
+  color?: string;
 }
 
 export interface IBlogPost extends Document {
@@ -177,18 +190,14 @@ export interface IBlogPost extends Document {
   dateEdited?: string;
 }
 
-// //mẫu:
-// const sampleData: IBlogPost[] = [
-//   {
-//     _id: "dikgaoidgjiadjfa",
-//     content: "Sample blog",
-//     author: {
-//       email: "test@gmail.com",
-//       name: "test",
-//       phone: "...",
-//       password: "shhh....",
-//     },
-//     images: ["imageLink1", "imageLink2", "...."],
-//     datePosted: "2024-10-21",
-//   },
-// ];
+export enum EPaymentMethod {
+  CASH = "cash",
+  VNPAY = "vnpay",
+}
+
+export enum EStatusOrder {
+  PENDING = "pending",
+  COMPLETED = "completed",
+  FAILED = "failed",
+  PACKING = "packing",
+}

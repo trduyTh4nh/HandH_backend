@@ -26,12 +26,13 @@ const orderSchema: Schema = new Schema<IOrder>(
     },
     paymentMethod: {
       type: String,
+      enum: ["cash", "vnpay"],
       required: true,
     },
     orderStatus: {
       type: String,
       required: true,
-      enum: ["pending", "completed", "failed"],
+      enum: ["pending", "completed", "failed", "packing", "canceled"],
     },
     shippingCost: {
       type: Number,

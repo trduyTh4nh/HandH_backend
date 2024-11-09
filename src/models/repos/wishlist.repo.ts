@@ -84,6 +84,7 @@ const getAllProductInWistList = async (idUser: string): Promise<any> => {
     userId: idUser,
   });
 };
+
 export {
   addProducIntoWishListFunc,
   removeProducFromWishListFunc,
