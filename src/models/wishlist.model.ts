@@ -12,7 +12,9 @@ const wishlistSchema: Schema = new Schema<IWishList>(
       ref: "user",
       required: true,
     },
-    products: [productSchema],
+    products: {
+      type: [Object],
+    },
   },
   {
     collection: COLLECTION_NAME,

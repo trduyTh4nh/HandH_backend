@@ -40,6 +40,44 @@ const addProducIntoWishListFunc = async (
   }
 };
 
+// const addProducIntoWishListFunc = async (
+//   idProduct: string,
+//   idUser: string
+// ): Promise<any> => {
+//   const foundProduct = await ProductModel.findOne({
+//     _id: _idConverted(idProduct),
+//   });
+
+//   if (!foundProduct) {
+//     throw new BadRequestError("Not found product!");
+//   }
+
+//   const wishlistUpdate = await WishListModel.updateOne(
+//     {
+//       userId: idUser,
+//       "products.product_slug": { $ne: foundProduct.product_slug },
+//     },
+//     {
+//       $push: {
+//         products: {
+//           product_slug: foundProduct.product_slug,
+//           ...foundProduct.toObject(),
+//         },
+//       },
+//     },
+//     { upsert: true }
+//   );
+
+//   if (
+//     wishlistUpdate.modifiedCount === 0 &&
+//     wishlistUpdate.upsertedCount === 0
+//   ) {
+//     throw new BadRequestError("Product already in wishlist!");
+//   }
+
+//   return wishlistUpdate;
+// };
+
 const removeProducFromWishListFunc = async (
   idProduct: string,
   idUser: string

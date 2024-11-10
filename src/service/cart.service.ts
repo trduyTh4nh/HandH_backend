@@ -1,5 +1,6 @@
 import { BadRequestError } from "../core/error.response";
 import Cart from "../models/cart.model";
+import Category from "../models/category.model";
 import {
   addProductIntoCartFunc,
   createCartFunc,
@@ -52,11 +53,15 @@ class CartService {
       productAdd.product_colors.find((c) => c.color_code === color)
         ?.color_price!;
 
+    const getCategory = await Category.findOne({
+      _id: productAdd.product_category,
+    });
+
     const cartDetail: any = {
       product: {
         _id: productAdd._id,
         name_product: productAdd.product_name,
-        category_product: productAdd.product_category,
+        category_product: getCategory?.category_name,
         thumb_product: productAdd.product_thumb,
       },
       quantity: 1,
