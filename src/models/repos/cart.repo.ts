@@ -131,8 +131,10 @@ const decreaseQuantityProductInCartFunc = async (
 
   if (cartItem.quantity > 1) {
     cartItem.quantity -= 1;
+
+    console.log("cartItem: ", cartItem);
     const productCartUpdate: IProduct = await findProductById(
-      cartItem.product.toString()
+      cartItem.product._id.toString()
     );
     const priceProduct =
       productCartUpdate.product_price +
