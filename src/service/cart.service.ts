@@ -7,6 +7,7 @@ import {
   decreaseQuantityProductInCartFunc,
   findCartById,
   getAllCartDetailOfUserFunc,
+  increaseQuantityProductInCartFunc,
   removeProductInCartFunc,
   updateCart,
 } from "../models/repos/cart.repo";
@@ -117,6 +118,13 @@ class CartService {
     idCart: string
   ): Promise<any> {
     return await decreaseQuantityProductInCartFunc(idCartDetail, idCart);
+  }
+
+  static async increaseQuantityProductInCart(
+    idCartDetail: string,
+    idCart: string
+  ): Promise<any> {
+    return await increaseQuantityProductInCartFunc(idCartDetail, idCart);
   }
 
   static async getCartOfUser(idUser: string): Promise<any> {

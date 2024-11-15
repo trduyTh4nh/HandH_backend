@@ -18,5 +18,9 @@ router.put(
   "/decreaseQuantityProductIncart",
   asyncHandler(cartController.decreaseQuantity)
 );
+router.put(
+  "/increaseQuantityProductIncart",
+  asyncHandler(cartController.increaseQuantity)
+);
 router.get("/getCartUser/:id", asyncHandler(cartController.getCartOfUser));
 export default router;

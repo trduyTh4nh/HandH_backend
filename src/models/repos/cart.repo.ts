@@ -154,6 +154,45 @@ const decreaseQuantityProductInCartFunc = async (
   updateCart(foundCart);
   return await foundCart.save();
 };
+
+const increaseQuantityProductInCartFunc = async (
+  idCartDetail: string,
+  idCart: string
+): Promise<any> => {
+  const foundCart = await findCartById(idCart);
+  console.log("idCartDetail: ", idCartDetail);
+  if (!foundCart) {
+    throw new BadRequestError("Can not find cart to remove product!");
+  }
+
+  const cartItem = foundCart.cart_products.find(
+    (cartItem) => cartItem._id?.toString() === idCartDetail
+  );
+
+  if (!cartItem) {
+    throw new BadRequestError("Cart detail not found in the cart!");
+  }
+
+  cartItem.quantity += 1;
+
+  console.log("cartItem: ", cartItem);
+  const productCartUpdate: IProduct = await findProductById(
+    cartItem.product._id.toString()
+  );
+  const priceProduct =
+    productCartUpdate.product_price +
+    productCartUpdate.product_sizes.find((s) => (s.size_name = cartItem.size))
+      ?.size_price! +
+    productCartUpdate.product_colors.find(
+      (c) => c.color_code === cartItem.color
+    )?.color_price!;
+
+  cartItem.priceCartDetail = cartItem.quantity * priceProduct;
+
+  updateCart(foundCart);
+  return await foundCart.save();
+};
+
 const getAllCartDetailOfUserFunc = async (idUser: string): Promise<any> => {
   const cartUser = await findCartByIdUser(idUser);
 
@@ -174,4 +213,5 @@ export {
   decreaseQuantityProductInCartFunc,
   findCartByIdUser,
   getAllCartDetailOfUserFunc,
+  increaseQuantityProductInCartFunc,
 };

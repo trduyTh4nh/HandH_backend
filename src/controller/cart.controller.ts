@@ -65,6 +65,23 @@ class CartController {
     }).send(res);
   };
 
+  increaseQuantity = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const idCartDetail = req.body.cartDetail;
+    const idCart = req.body.cart;
+
+    new SuccessResponse({
+      message: "Decrease quantity successfully!",
+      metadata: await CartService.increaseQuantityProductInCart(
+        idCartDetail,
+        idCart
+      ),
+    }).send(res);
+  };
+
   getCartOfUser = async (req: Request, res: Response, next: NextFunction) => {
     const user = req.params.id;
 
