@@ -71,6 +71,7 @@ class CartService {
         name_product: productAdd.product_name,
         category_product: getCategory?.category_name,
         thumb_product: productAdd.product_thumb,
+        price_product: productAdd.product_price,
       },
       quantity: 1,
       size: { size: size, priceSize: priceSize },
