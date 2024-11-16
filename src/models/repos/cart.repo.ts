@@ -137,13 +137,14 @@ const decreaseQuantityProductInCartFunc = async (
     const productCartUpdate: IProduct = await findProductById(
       cartItem.product._id.toString()
     );
-    // coi chỗ giảm giá này nó có giảm giá tiền của màu và size không>
+    console.log("productCartUpdate: ", productCartUpdate);
     const priceProduct =
       productCartUpdate.product_price +
-      productCartUpdate.product_sizes.find((s) => (s.size_name = cartItem.size))
-        ?.size_price! +
+      productCartUpdate.product_sizes.find(
+        (s) => (s.size_name = cartItem.size.size)
+      )?.size_price! +
       productCartUpdate.product_colors.find(
-        (c) => c.color_code === cartItem.color
+        (c) => c.color_code === cartItem.color.color
       )?.color_price!;
 
     cartItem.priceCartDetail = cartItem.quantity * priceProduct;
@@ -183,10 +184,11 @@ const increaseQuantityProductInCartFunc = async (
   );
   const priceProduct =
     productCartUpdate.product_price +
-    productCartUpdate.product_sizes.find((s) => (s.size_name = cartItem.size))
-      ?.size_price! +
+    productCartUpdate.product_sizes.find(
+      (s) => (s.size_name = cartItem.size.size)
+    )?.size_price! +
     productCartUpdate.product_colors.find(
-      (c) => c.color_code === cartItem.color
+      (c) => c.color_code === cartItem.color.color
     )?.color_price!;
 
   cartItem.priceCartDetail = cartItem.quantity * priceProduct;
