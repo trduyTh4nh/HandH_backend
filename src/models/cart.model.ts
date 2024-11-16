@@ -20,11 +20,11 @@ const cartDetailSchema: Schema = new Schema<ICartDetail>({
     required: true,
   },
   size: {
-    type: String,
+    type: Object,
     require: true,
   },
   color: {
-    type: String,
+    type: Object,
     required: true,
   },
 });

@@ -22,19 +22,20 @@ const addProductIntoCartFunc = async (
   cartDetail: ICartDetail,
   idCart: string
 ): Promise<any> => {
-  const { quantity, product, size, color } = cartDetail;
+  const { quantity, product, size, color }: any = cartDetail;
   const foundCart = await findCartById(idCart);
 
   if (!foundCart) {
     throw new BadRequestError("Can not find cart to add!");
   }
 
-  const checkProductExists = foundCart.cart_products.find(
-    (pro) =>
-      pro.product.toString() === product._id?.toString() &&
-      pro.size === size &&
-      pro.color === color
-  );
+  const checkProductExists = foundCart.cart_products.find((pro: any) => {
+    return (
+      pro.product._id.toString() === product._id?.toString() &&
+      pro.size.size === size.size &&
+      pro.color.color === color.color
+    );
+  });
 
   if (checkProductExists) {
     checkProductExists.quantity += 1;
@@ -47,15 +48,18 @@ const addProductIntoCartFunc = async (
     if (!productFound) {
       throw new BadRequestError("Can not find product to add!");
     }
+
     const checkColor = productFound.product_colors
       .map((e) => e.color_code)
-      .includes(color);
+      .includes(color.color);
+
     if (!checkColor) {
       throw new BadRequestError("The color does not exist in this product!");
     }
+
     const checkSize = productFound.product_sizes
       .map((e) => e.size_name)
-      .includes(size);
+      .includes(size.size);
     if (!checkSize) {
       throw new BadRequestError("The size does not exist in this product!");
     }
@@ -68,9 +72,6 @@ const addProductIntoCartFunc = async (
   foundCart.cart_total_price = foundCart.cart_products
     .map((e) => e.priceCartDetail)
     .reduce((prev, acc) => acc + prev);
-
-  console.log("quantity: ", foundCart.cart_products[0].quantity);
-  console.log("priceCartDetail: ", foundCart.cart_products[0].priceCartDetail);
 
   const cartAdded = await foundCart.save();
 
@@ -136,6 +137,7 @@ const decreaseQuantityProductInCartFunc = async (
     const productCartUpdate: IProduct = await findProductById(
       cartItem.product._id.toString()
     );
+    // coi chỗ giảm giá này nó có giảm giá tiền của màu và size không>
     const priceProduct =
       productCartUpdate.product_price +
       productCartUpdate.product_sizes.find((s) => (s.size_name = cartItem.size))

@@ -151,8 +151,8 @@ export interface ICartDetail extends Document {
   quantity: number;
   product: any;
   priceCartDetail: number;
-  size: string;
-  color: string;
+  size: any;
+  color: any;
   isPicked: boolean;
 }
 

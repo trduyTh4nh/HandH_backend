@@ -54,6 +54,13 @@ class CartService {
       productAdd.product_colors.find((c) => c.color_code === color)
         ?.color_price!;
 
+    const priceSize = productAdd.product_sizes.find((s) => s.size_name === size)
+      ?.size_price!;
+
+    const priceColor = productAdd.product_colors.find(
+      (c) => c.color_code === color
+    )?.color_price!;
+
     const getCategory = await Category.findOne({
       _id: productAdd.product_category,
     });
@@ -66,8 +73,8 @@ class CartService {
         thumb_product: productAdd.product_thumb,
       },
       quantity: 1,
-      size: size,
-      color: color,
+      size: { size: size, priceSize: priceSize },
+      color: { color: color, priceColor: priceColor },
       priceCartDetail: priceProduct,
     };
 
