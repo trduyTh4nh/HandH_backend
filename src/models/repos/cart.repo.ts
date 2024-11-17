@@ -92,7 +92,17 @@ const removeProductInCartFunc = async (
   foundCart.cart_products = foundCart.cart_products.filter(
     (cartItem) => cartItem._id?.toString() !== idCartDetail.toString()
   );
-  updateCart(foundCart);
+
+  console.log(
+    "foundCart.cart_products.length: ",
+    foundCart.cart_products.length
+  );
+  if (foundCart.cart_products.length === 0) {
+    foundCart.cart_total_price = 0;
+    foundCart.cart_count = 0;
+  } else {
+    updateCart(foundCart);
+  }
   return await foundCart.save();
 };
 
@@ -104,6 +114,7 @@ export const updateCart = (cart: ICart): void => {
     .map((e) => e.priceCartDetail)
     .reduce((prev, acc) => acc + prev);
 };
+
 const findCartById = async (id: string) => {
   return await Cart.findOne({
     _id: _idConverted(id),
