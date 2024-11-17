@@ -433,6 +433,8 @@ const getProductFromCateFunc = async (idCate: string) => {
   return result;
 };
 
+// const update
+
 export {
   getAllProducts,
   crearteProductFunc,

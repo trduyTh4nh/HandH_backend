@@ -14,7 +14,7 @@ const orderSchema: Schema = new Schema<IOrder>(
       required: true,
     },
     products: {
-      type: [productSchema],
+      type: [Object],
     },
     totalPrice: {
       type: Number,
