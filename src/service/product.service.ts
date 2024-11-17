@@ -23,6 +23,7 @@ import {
   unPublicProductFunc,
   updateImageForProductFunc,
   updateProductFunc,
+  updateQuantityStockProductFunc,
 } from "../models/repos/product.repo";
 import {
   ICategory,
@@ -232,6 +233,13 @@ class ProductService {
 
   static async getProductWithPage(skip: number, take: number): Promise<any> {
     return await getProductWithPageFunc(skip, take);
+  }
+
+  static async updateQuantityStockProduct(
+    quantity: number,
+    idProduct: string
+  ): Promise<any> {
+    return await updateQuantityStockProductFunc(quantity, idProduct);
   }
 }
 

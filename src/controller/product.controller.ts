@@ -271,6 +271,21 @@ class ProductController {
       metadata: await ProductService.getProductWithPage(skip, take),
     }).send(res);
   };
+
+  updateQuantityStockPro = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { quantity, idProduct } = req.body;
+    new SuccessResponse({
+      message: "update quantity product stock successfully!",
+      metadata: await ProductService.updateQuantityStockProduct(
+        quantity,
+        idProduct
+      ),
+    }).send(res);
+  };
 }
 
 export default new ProductController();

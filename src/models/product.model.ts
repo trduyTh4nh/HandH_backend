@@ -66,6 +66,7 @@ export const productSchema: Schema = new Schema<IProduct>(
     },
     product_stock: {
       type: Number,
+      default: 0,
     },
     product_images: {
       type: [],

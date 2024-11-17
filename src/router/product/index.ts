@@ -34,6 +34,10 @@ router.use(authentication);
 
 router.use(checkRoleAd);
 router.put(
+  "/updateQuantityStock",
+  asyncHandler(productController.updateQuantityStockPro)
+);
+router.put(
   "/unPublicProduct/:id",
   asyncHandler(productController.unPublicProduct)
 );

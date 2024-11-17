@@ -5,6 +5,10 @@ import categoryController from "../../controller/category.controller";
 const router = Router();
 router.get("/", asyncHandler(categoryController.getAllCategory));
 router.get("/:id", asyncHandler(categoryController.getACategory));
+router.get(
+  "/getQUantityProductOfCate/:id",
+  asyncHandler(categoryController.getQuantityProductOfCategory)
+);
 router.use(authentication);
 router.use(checkRoleAd);
 router.post("/", asyncHandler(categoryController.createCategory));

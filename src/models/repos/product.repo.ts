@@ -433,7 +433,27 @@ const getProductFromCateFunc = async (idCate: string) => {
   return result;
 };
 
-// const update
+const updateQuantityStockProductFunc = async (
+  quantity: number,
+  idProduct: string
+) => {
+  const updatedProduct = await ProductModel.findOneAndUpdate(
+    {
+      _id: idProduct,
+      product_stock: { $gte: -quantity },
+    },
+    { $inc: { product_stock: quantity } },
+    { new: true }
+  );
+
+  if (!updatedProduct) {
+    throw new BadRequestError(
+      "Not found product to update stock or insufficient stock!"
+    );
+  }
+
+  return updatedProduct;
+};
 
 export {
   getAllProducts,
@@ -458,4 +478,5 @@ export {
   addImageForProductFunc,
   getProductFromCateFunc,
   getProductWithPageFunc,
+  updateQuantityStockProductFunc,
 };
