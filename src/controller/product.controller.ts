@@ -169,10 +169,6 @@ class ProductController {
   searchProduct = async (req: Request, res: Response, next: NextFunction) => {
     const query: string | undefined = req.query.search as string;
 
-    if (!query) {
-      throw new BadRequestError("Search query is required!");
-    }
-
     new SuccessResponse({
       message: "Result search",
       metadata: await ProductService.searchProduct(query),

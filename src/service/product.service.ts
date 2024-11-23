@@ -171,6 +171,9 @@ class ProductService {
   }
 
   static async searchProduct(query: string): Promise<any> {
+    if (!query) {
+      return [];
+    }
     return await searchProductFunc(query);
   }
 
