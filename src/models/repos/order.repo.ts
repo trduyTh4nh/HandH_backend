@@ -1,3 +1,4 @@
+import { forEach } from "lodash";
 import { BadRequestError } from "../../core/error.response";
 import { EStatusOrder, IOrder, IUserAddress } from "../../types/type.all";
 import { _idConverted } from "../../utils";
@@ -17,6 +18,7 @@ const getAllOrderOfUser = async (idUser: string) => {
   const result = await OrderModel.find({
     userId: foundUser._id,
   });
+
   return result;
 };
 
@@ -40,16 +42,9 @@ const createOrderFromCartFunc = async (
   userId: string,
   shippingAddress: IUserAddress,
   paymentMethod: string,
-  notes: string
-) => {
-  console.log("INPUT DATA: ", {
-    cartId,
-    userId,
-    shippingAddress,
-    paymentMethod,
-    notes,
-  });
-
+  notes: string,
+  cartDetails: string[]
+): Promise<any> => {
   const cart = await Cart.findOne({
     _id: cartId,
     cart_user: userId,
@@ -61,20 +56,33 @@ const createOrderFromCartFunc = async (
   // truyền id product vào sao đó find product đó gắn vào
   // field product trong cart product của cart
 
-  const orderProducts = cart.cart_products.map((cartDetail) => {
-    return {
-      productId: cartDetail.product._id,
-      product_category: cartDetail.product.product_category,
-      product_price: cartDetail.product.product_price,
-      product_description: cartDetail.product.product_description,
-      product_thumb: cartDetail.product.product_thumb,
-      product_name: cartDetail.product.product_name,
-      quantity: cartDetail.quantity,
-      priceAtPurchase: cartDetail.priceCartDetail,
-      size: cartDetail.size,
-      color: cartDetail.color,
-    };
-  });
+  if (!cartDetails || cartDetails.length <= 0) {
+    throw new BadRequestError("Not found product to create order!");
+  }
+
+  const orderProducts = cart.cart_products
+    .map((cartDetail) => {
+      const matchProduct = cartDetails.find(
+        (id) => id === cartDetail.id.toString()
+      );
+
+      if (!matchProduct) return null;
+
+      return {
+        id: cartDetail._id,
+        productId: cartDetail.product._id,
+        product_category: cartDetail.product.product_category,
+        product_price: cartDetail.product.product_price,
+        product_description: cartDetail.product.product_description,
+        product_thumb: cartDetail.product.product_thumb,
+        product_name: cartDetail.product.product_name,
+        quantity: cartDetail.quantity,
+        priceAtPurchase: cartDetail.priceCartDetail,
+        size: cartDetail.size,
+        color: cartDetail.color,
+      };
+    })
+    .filter((item) => item);
 
   const order = new OrderModel({
     userId: userId,

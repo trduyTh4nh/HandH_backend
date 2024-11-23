@@ -21,6 +21,7 @@ class OrderController {
     const shippingAddress: IUserAddress = req.body.shippingAddress;
     const paymentMethod = req.body.paymentMethod;
     const notes = req.body.notes;
+    const cartDetails: string[] = req.body.cartDetail;
 
     new SuccessResponse({
       message: "create order from cart successfully!",
@@ -29,7 +30,8 @@ class OrderController {
         userId,
         shippingAddress,
         paymentMethod,
-        notes
+        notes,
+        cartDetails
       ),
     }).send(res);
   };

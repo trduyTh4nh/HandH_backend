@@ -27,6 +27,10 @@ const cartDetailSchema: Schema = new Schema<ICartDetail>({
     type: Object,
     required: true,
   },
+  isPicked: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const cartSchema: Schema = new Schema<ICart>(
