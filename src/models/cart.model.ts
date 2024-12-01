@@ -31,6 +31,9 @@ const cartDetailSchema: Schema = new Schema<ICartDetail>({
     type: Boolean,
     default: false,
   },
+  image: {
+    type: String,
+  },
 });
 
 const cartSchema: Schema = new Schema<ICart>(

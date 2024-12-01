@@ -60,9 +60,26 @@ const addProductIntoCartFunc = async (
     const checkSize = productFound.product_sizes
       .map((e) => e.size_name)
       .includes(size.size);
+
+    var colorPro: any;
+    let imageOfColor: any = productFound.product_colors.find((colorProduct) => {
+      console.log("color product: ", colorProduct);
+      colorPro = colorProduct;
+      return colorProduct.color_code === color;
+    });
+
+    console.log("image of color: ", colorPro);
+
+    if (colorPro) {
+      cartDetail.image = colorPro.image_product_col ?? "";
+    } else {
+      cartDetail.image = "";
+    }
+
     if (!checkSize) {
       throw new BadRequestError("The size does not exist in this product!");
     }
+
     foundCart.cart_products.push(cartDetail);
   }
 

@@ -121,7 +121,12 @@ const updateBlogV2 = async (
 
   if (content) updateData.content = content;
 
+  console.log("foundBlog: ", foundBlog);
+
   if (images && arrPositionImage && arrPositionImage.length > 0) {
+    console.log("images: ", images);
+    console.log("arrPosition: ", arrPositionImage);
+
     if (images.length !== arrPositionImage.length) {
       throw new BadRequestError("Image count must match position count.");
     }
@@ -140,10 +145,6 @@ const updateBlogV2 = async (
       const newImageUpload = await uploadImage(images[i]);
       foundBlog.images[position] = newImageUpload.publicUrl;
     }
-  } else if (images) {
-    throw new BadRequestError(
-      "Image positions are required when updating images."
-    );
   }
 
   Object.assign(foundBlog, updateData);

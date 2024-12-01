@@ -14,5 +14,8 @@ router.use(checkRoleAd);
 router.post("/", asyncHandler(categoryController.createCategory));
 router.delete("/:id", asyncHandler(categoryController.deleteCategory));
 router.put("/:id", asyncHandler(categoryController.updateCategory));
-
+router.post(
+  "/createCategory",
+  asyncHandler(categoryController.createCategoryV2)
+);
 export default router;

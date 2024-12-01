@@ -1,10 +1,27 @@
 import { BadRequestError } from "../../core/error.response";
 import { ICategory } from "../../types/type.all";
-import { _idConverted } from "../../utils";
+import { _idConverted, uploadImage } from "../../utils";
 import Category from "../category.model";
 import ProductModel from "../product.model";
 
 const createCategoryFunc = async (category: ICategory): Promise<ICategory> => {
+  return await Category.create(category);
+};
+
+const createCategoryFuncv2 = async (category: any): Promise<any> => {
+  const {
+    category_name,
+    category_description,
+    category_image,
+    category_total,
+  } = category;
+
+  const imagesUpload: any = await uploadImage(category_image[0]);
+
+  if (!imagesUpload?.publicUrl) {
+    throw new Error("Image upload failed!");
+  }
+  category.category_image = imagesUpload.publicUrl;
   return await Category.create(category);
 };
 
@@ -72,4 +89,5 @@ export {
   deleteCategoryFunc,
   updateCategoryFunc,
   getQuantityProductOfCategoryFunc,
+  createCategoryFuncv2,
 };

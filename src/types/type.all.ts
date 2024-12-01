@@ -154,6 +154,7 @@ export interface ICartDetail extends Document {
   size: any;
   color: any;
   isPicked: boolean;
+  image: string;
 }
 
 export interface IOrder extends Document {

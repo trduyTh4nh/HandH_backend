@@ -21,6 +21,29 @@ class CategoryController {
     }).send(res);
   };
 
+  createCategoryV2 = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const category_name = req.body.category_name;
+    const category_description = req.body.category_description;
+    const category_image = req.files;
+    const category_total = req.body.category_total;
+
+    const category: any = {
+      category_name: category_name,
+      category_description: category_description,
+      category_image: category_image,
+      category_total: category_total,
+    };
+
+    new SuccessResponse({
+      message: "Create category successfully!",
+      metadata: await CategoryService.createCategoryV2(category),
+    }).send(res);
+  };
+
   getAllCategory = async (req: Request, res: Response, next: NextFunction) => {
     new SuccessResponse({
       message: "Get category successfully!",
