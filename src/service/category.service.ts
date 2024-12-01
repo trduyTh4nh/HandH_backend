@@ -2,6 +2,7 @@ import { update } from "lodash";
 import { BadRequestError } from "../core/error.response";
 import {
   createCategoryFunc,
+  createCategoryFuncv2,
   deleteCategoryFunc,
   getACategoryFunc,
   getAllCategoryFunc,
@@ -27,6 +28,15 @@ class CategoryService {
       throw new BadRequestError("Missing some fields!");
     }
     return await createCategoryFunc(category);
+  }
+
+  static async createCategoryV2(category: ICategory): Promise<any> {
+    const { category_name, category_description, category_image } = category;
+
+    if (!category_name || !category_description || !category_image) {
+      throw new BadRequestError("Missing some fields!");
+    }
+    return await createCategoryFuncv2(category);
   }
 
   static async getAllCategory(): Promise<any> {
