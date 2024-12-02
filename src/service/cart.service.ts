@@ -8,6 +8,7 @@ import {
   findCartById,
   getAllCartDetailOfUserFunc,
   increaseQuantityProductInCartFunc,
+  removeMannyCartdetailInCartFunc,
   removeProductInCartFunc,
   updateCart,
 } from "../models/repos/cart.repo";
@@ -140,6 +141,17 @@ class CartService {
       throw new BadRequestError("Missing user to get cart!");
     }
     return await getAllCartDetailOfUserFunc(idUser);
+  }
+
+  static async removeManyCartDetailsInCart(
+    idCart: string,
+    idCartDetails: string[]
+  ): Promise<any> {
+    if (!idCart) {
+      throw new BadRequestError("Missing idCart to remove manny product!");
+    }
+
+    return await removeMannyCartdetailInCartFunc(idCart, idCartDetails);
   }
 }
 

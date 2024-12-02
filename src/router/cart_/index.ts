@@ -5,6 +5,10 @@ import cartController from "../../controller/cart.controller";
 const router = Router();
 /// nhớ thêm api lấy toàn bộ sản phẩm
 router.use(authentication);
+router.delete(
+  "/deleteManyCartDetail",
+  asyncHandler(cartController.removeManyProductInCart)
+);
 router.post("/createCart", asyncHandler(cartController.createCart));
 router.patch(
   "/addProductToCart",
