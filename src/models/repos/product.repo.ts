@@ -88,7 +88,7 @@ const getPageProducts = async (page: number, quantityPerpage: number) => {
   // chỗ này phải filter quantity mềm
 
   const quantityProducerPerPage = quantityPerpage;
-  const resutPage = await ProductModel.find({})
+  const resutPage = await ProductModel.find({ isPublished: true })
     .limit(quantityProducerPerPage)
     .skip(quantityProducerPerPage * (page - 1));
 
