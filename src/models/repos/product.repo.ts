@@ -88,7 +88,7 @@ const getPageProducts = async (page: number, quantityPerpage: number) => {
   // chỗ này phải filter quantity mềm
 
   const quantityProducerPerPage = quantityPerpage;
-  const resutPage = await ProductModel.find({})
+  const resutPage = await ProductModel.find({ isPublished: true })
     .limit(quantityProducerPerPage)
     .skip(quantityProducerPerPage * (page - 1));
 
@@ -405,7 +405,9 @@ const getProductWithPageFunc = async (skip: number, take: number) => {
 };
 
 const getNProductLastestFunc = async (n: number) => {
-  const result = await ProductModel.find({}).sort({ createdAt: -1 }).limit(n);
+  const result = await ProductModel.find({ isPublished: true })
+    .sort({ createdAt: -1 })
+    .limit(n);
   console.log("result: ", result);
   return result;
 };

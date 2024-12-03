@@ -5,6 +5,7 @@ import { _idConverted } from "../../utils";
 import Cart from "../cart.model";
 import OrderModel from "../order.model";
 import User from "../user.model";
+import ProductModel from "../product.model";
 
 const getAllOrderOfUser = async (idUser: string) => {
   const foundUser = await User.findOne({
@@ -60,29 +61,47 @@ const createOrderFromCartFunc = async (
     throw new BadRequestError("Not found product to create order!");
   }
 
-  const orderProducts = cart.cart_products
-    .map((cartDetail) => {
+  const foundProductToMatch = async (idPro: string) => {
+    return await ProductModel.findOne({ _id: idPro });
+  };
+
+  // chỗ này dùng promise.all để có thể đảm bảo function bên trong hoạt động
+  // đồng bộ nghĩa là chạy tuần tự function tìm sản phẩm để lấy thông tin
+
+  const orderProducts = await Promise.all(
+    cart.cart_products.map(async (cartDetail) => {
       const matchProduct = cartDetails.find(
         (id) => id === cartDetail.id.toString()
       );
 
       if (!matchProduct) return null;
 
+      const productMatched = await foundProductToMatch(
+        cartDetail.product._id.toString()
+      );
+
       return {
         id: cartDetail._id,
         productId: cartDetail.product._id,
-        product_category: cartDetail.product.product_category,
-        product_price: cartDetail.product.product_price,
-        product_description: cartDetail.product.product_description,
-        product_thumb: cartDetail.product.product_thumb,
-        product_name: cartDetail.product.product_name,
+        product_category: productMatched!.product_category,
+        product_price: productMatched!.product_price,
+        product_description: productMatched!.product_description,
+        product_thumb: productMatched!.product_thumb,
+        product_name: productMatched!.product_name,
         quantity: cartDetail.quantity,
         priceAtPurchase: cartDetail.priceCartDetail,
         size: cartDetail.size,
         color: cartDetail.color,
       };
     })
-    .filter((item) => item);
+  );
+
+  // loại bổ các đơn hàng null
+  const filteredOrderProducts = orderProducts.filter((item) => item !== null);
+
+  if (filteredOrderProducts.length === 0) {
+    throw new BadRequestError("No valid products found to create the order!");
+  }
 
   const order = new OrderModel({
     userId: userId,

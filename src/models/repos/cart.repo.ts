@@ -233,6 +233,29 @@ const getAllCartDetailOfUserFunc = async (idUser: string): Promise<any> => {
   };
 };
 
+const removeMannyCartdetailInCartFunc = async (
+  idCart: string,
+  cartDetails: string[]
+) => {
+  const findCartToRemove = await Cart.findOne({ _id: idCart });
+
+  if (!findCartToRemove) {
+    throw new Error("Cart not found");
+  }
+
+  const updatedCartProducts = findCartToRemove.cart_products.filter(
+    (cartDetail) => !cartDetails.includes(cartDetail._id!.toString())
+  );
+
+  findCartToRemove.cart_products = updatedCartProducts;
+
+  findCartToRemove.cart_products.forEach((e) => {
+    console.log("id: ", e._id);
+  });
+
+  return await findCartToRemove.save();
+};
+
 const findCartByIdUser = async (idUser: string): Promise<ICart | null> => {
   return await Cart.findOne({ cart_user: _idConverted(idUser) });
 };
@@ -246,4 +269,5 @@ export {
   findCartByIdUser,
   getAllCartDetailOfUserFunc,
   increaseQuantityProductInCartFunc,
+  removeMannyCartdetailInCartFunc,
 };

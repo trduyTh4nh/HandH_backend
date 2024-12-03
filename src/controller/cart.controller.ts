@@ -90,6 +90,23 @@ class CartController {
       metadata: await CartService.getCartOfUser(user),
     }).send(res);
   };
+
+  removeManyProductInCart = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const idCart = req.body.cart;
+    const idCartDetails = req.body.cartDetails;
+
+    new SuccessResponse({
+      message: "Delete many prouduct in cart successfully!",
+      metadata: await CartService.removeManyCartDetailsInCart(
+        idCart,
+        idCartDetails
+      ),
+    }).send(res);
+  };
 }
 
 export default new CartController();
