@@ -103,6 +103,15 @@ class UploadService {
 
     return resultUpdate;
   }
+
+  static async getABanner(idBanner: string) {
+    const foundBanner = await Banner.findOne({ _id: idBanner });
+    console.log("foundBanner: ", foundBanner);
+    if (!foundBanner) {
+      throw new BadRequestError("Not found banner to get!");
+    }
+    return foundBanner;
+  }
 }
 
 export default UploadService;

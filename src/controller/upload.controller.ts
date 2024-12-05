@@ -67,6 +67,14 @@ class UploadController {
       metadata: await UploadSerivice.updateModeBanner(bannerId, mode),
     }).send(res);
   };
+
+  getABanner = async (req: Request, res: Response, next: NextFunction) => {
+    const bannerId = req.params.id;
+    new SuccessResponse({
+      message: "Get a banner successfully!",
+      metadata: await UploadSerivice.getABanner(bannerId),
+    }).send(res);
+  };
 }
 
 export default new UploadController();
