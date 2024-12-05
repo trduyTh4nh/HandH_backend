@@ -278,6 +278,7 @@ const searchProductFunc = async (
 
   const result = await ProductModel.find({
     product_name: { $regex: regex },
+    isPublished: true,
   })
     .skip((page - 1) * limit)
     .limit(limit)
