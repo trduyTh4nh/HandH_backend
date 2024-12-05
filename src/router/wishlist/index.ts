@@ -10,7 +10,7 @@ router.post(
   asyncHandler(wishlistController.addProductToWishList)
 );
 router.delete(
-  "/deleteProductInWishlist",
+  "/deleteProductInWishlist/:productId",
   asyncHandler(wishlistController.removeProductInWishlish)
 );
 router.get(

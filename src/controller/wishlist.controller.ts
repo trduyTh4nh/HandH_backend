@@ -28,7 +28,7 @@ class WishListController {
     next: NextFunction
   ) => {
     const user: any = req.headerData?.user || ({} as IUser);
-    const productId = req.body.productId;
+    const productId = req.params.productId;
 
     new SuccessResponse({
       message: "Remove product from wishlist successfully!",
