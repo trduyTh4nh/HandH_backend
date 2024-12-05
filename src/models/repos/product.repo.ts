@@ -85,13 +85,10 @@ const unDraftProductFunc = async (idProduct: string) => {
 };
 
 const getPageProducts = async (page: number, quantityPerpage: number) => {
-  // chỗ này phải filter quantity mềm
-
   const quantityProducerPerPage = quantityPerpage;
   const resutPage = await ProductModel.find({ isPublished: true })
     .limit(quantityProducerPerPage)
     .skip(quantityProducerPerPage * (page - 1));
-
   return resutPage;
 };
 
@@ -401,7 +398,9 @@ const searchProductByFilterFunc = async (
 };
 
 const getProductWithPageFunc = async (skip: number, take: number) => {
-  const product = await ProductModel.find().skip(skip).limit(take);
+  const product = await ProductModel.find({ isPublished: true })
+    .skip(skip)
+    .limit(take);
   return product;
 };
 
