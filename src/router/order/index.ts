@@ -6,6 +6,10 @@ import orderController from "../../controller/order.controller";
 const router = Router();
 
 router.use(authentication);
+router.put(
+  "/updateStatusOrder",
+  asyncHandler(orderController.updateStatusForOrder)
+);
 router.post(
   "/createOrderFromCart",
   asyncHandler(orderController.createOrderFromCart)
@@ -18,8 +22,5 @@ router.get(
 router.delete("/deleteOrder/:id", asyncHandler(orderController.deleteOrder));
 router.use(checkRoleAd);
 router.get("/getAllOrder", asyncHandler(orderController.getAllOrder));
-router.put(
-  "/updateStatusOrder",
-  asyncHandler(orderController.updateStatusForOrder)
-);
+
 export default router;
