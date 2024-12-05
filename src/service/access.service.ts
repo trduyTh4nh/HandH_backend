@@ -79,6 +79,7 @@ class AccessService {
         // console.log(`Create token success::`, tokens);
 
         const result: any = {
+          id: user._id,
           email: user.email,
           name: name,
           birthDay: birthDay,
