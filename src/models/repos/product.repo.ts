@@ -431,6 +431,7 @@ const getProductFromCateFunc = async (idCate: string) => {
 
   const result = await ProductModel.find({
     product_category: idCate,
+    isPublished: true,
   });
   return result;
 };
